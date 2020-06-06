@@ -1,0 +1,29 @@
+.navLink {
+    color: black
+}
+
+.navLink:hover {
+    color: rgb(9, 211, 69)
+}
+
+.containerLinks{
+   align-items: center;
+}
+
+.brand{
+    width: 5em;
+}
+
+.links{
+    width: auto;
+}
+
+.user{
+    width: 20em;
+   
+}
+
+
+
+
+

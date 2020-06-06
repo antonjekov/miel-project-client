@@ -1,0 +1,11 @@
+.form-control:focus {
+    border-color: rgb(9, 211, 69);
+    box-shadow: 0 0 0 0.2rem rgba(40, 167, 69, 0.25);
+}
+
+
+
+.AddProduct{
+    margin-top: 3em;
+    margin-bottom: 3em;
+    };

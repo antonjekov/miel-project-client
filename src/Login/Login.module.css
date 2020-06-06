@@ -1,0 +1,51 @@
+
+.form-control:focus {
+    border-color: rgb(9, 211, 69);
+    box-shadow: 0 0 0 0.2rem rgba(40, 167, 69, 0.25);
+}
+
+a{
+    color: orange;
+}
+
+.Login{
+    margin-top: 3em;
+    margin-bottom: 3em;
+    };
+
+
+
+/* .Login{
+     width: 83%; 
+    display: inline-block;
+    vertical-align: top;
+} */
+
+/* .form-control {
+    width: 30%;
+    margin: 0 auto;
+    padding: 1%;
+    text-align: center;
+}
+
+label {
+    float: left;
+    width: 30%;
+    text-align: right;
+}
+
+input {
+    text-align: center;
+    border:1px solid #234465;
+    padding: 1%;
+    width: 50%;
+    border-radius: 6px;
+    color: #234465;
+}
+
+form button {
+    width: auto;
+    padding: 2%;
+}
+
+ */

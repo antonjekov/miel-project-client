@@ -1,0 +1,16 @@
+.navLink {
+    color: black;    
+    font-weight: bold;    
+}
+
+.navLink:hover {
+    color: rgb(9, 211, 69)
+}
+
+.navLink:focus {
+    color: rgb(9, 211, 69)
+}
+
+
+
+

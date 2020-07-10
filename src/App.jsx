@@ -1,155 +1,83 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import './App.css';
 import { Row, Col, Container } from 'react-bootstrap';
 import Footer from './Footer/Footer';
 import NavigationControls from "./NavigacionControls/NavigationControls";
 import CategoryNavbar from './CategoryNavbar/CategoryNavbar';
-import AsideNavbar from './AsideNavbar/AsideNavbar';
-import Miel from './Miel/Miel';
 import Login from './Login/Login';
 import Register from './Register/Register';
-// import AddProduct from './AddProduct/AddProduct';
-// import ImageUpload from './ImageUpload/ImageUpload';
-// import ImageUploader from './ImageUploader/ImageUploader';
-import Logout from "./Logout/Logout";
+import CategoryPage from "./CategoryPage/CategoryPage";
 import AddProductFormic from './AddProductFormic/AddProductFormic';
+import AddSubcategory from "./AddSubcategory/AddSubcategory";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
-
+import Home from "./Home/Home";
+import SubcategoryProducts from "./SubcategoryProducts/SubcategoryProducts";
+import UserContext from "./contexts/UserContext";
+import { AuthContext } from "./contexts/Auth";
+import PrivateRoute from "./PrivateRoute/PrivateRoute"
+import ShoppingCard from "./ShoppingCard/ShoppingCard"
 
 function App() {
 
-  const [userName, setUserName] = useState('');
+  // const existingTokens = JSON.parse(localStorage.getItem("tokens"));
+  // const [authTokens, setAuthTokens] = useState(existingTokens);
+  
+  // const setTokens = (data) => {
+  //   localStorage.setItem("tokens", JSON.stringify(data));
+  //   setAuthTokens(data);
+  // }
+  const existingUserInfo =JSON.parse(localStorage.getItem("userInfo")) ;
+  const [userInfo, setUserInfo] = useState(existingUserInfo)
+
+  const setUser = (data)=>{
+    localStorage.setItem("userInfo",JSON.stringify(data))
+    setUserInfo(data)
+  }
 
   return (
-    <BrowserRouter>
-      {/* <Fragment> */}
+    <AuthContext.Provider value={{ userInfo, setUserInfo: setUser }}>
+      <BrowserRouter>
+        <NavigationControls />
+        <CategoryNavbar />
+        <Switch>
 
-      <NavigationControls userName={userName} />
-      <CategoryNavbar />
-      <Switch>
+          <Route path="/login" >
+            <Login setUser = {setUser}/>
+          </Route>
 
-        <Route path="/login">
-          <Container fluid>
-            <Row  >
-              <Col md={{ offset: 4, span: 4 }}>
-                <Login setUserName={setUserName} />
-              </Col>
-            </Row>
-          </Container>
-        </Route>
+          <Route path="/register" component={Register} />
 
-        <Route path="/logout">
-          <Logout />
-        </Route>
+          <PrivateRoute path="/add-product" component={AddProductFormic} />
 
-        <Route path="/register">
-          <Container fluid>
-            <Row  >
-              <Col md={{ offset: 2, span: 8 }}><Register /></Col>
-            </Row>
-          </Container>
-        </Route>
+          <PrivateRoute path="/add-subcategory" component={AddSubcategory}/>
+          
+          <Route path="/shoppingCard/add" component={ShoppingCard}/>
 
-        <Route path="/add-product">
-          <Container fluid>
-            <Row  >
-              <Col md={{ offset: 3, span: 6 }}><AddProductFormic /></Col>
-            </Row>
-          </Container>
-        </Route>
+          <Route path="/honey">
+            <CategoryPage category='honey' />
+          </Route>
 
-        <Route path="/">
-          <Container fluid>
-            <Row  >
-              <Col md={2}><AsideNavbar /></Col>
-              <Col md={10}><Miel /> </Col>
-            </Row>
-          </Container>
-        </Route>
+          <Route path="/cosmetics">
+            <CategoryPage category='cosmetics' />
+          </Route>
 
-      </Switch>
-      <Footer />
-      {/* </Fragment> */}
-    </BrowserRouter>
+          <Route path="/other bee products">
+            <CategoryPage category='other bee products' />
+          </Route>
 
-    //AddProductFormik
-    // <Container fluid>
-    //   <Row>
-    //     <Col><NavigationControls /></Col>
-    //   </Row>
+          <Route path="/apitherapy">
+            <CategoryPage category='apitherapy' />
+          </Route>
 
-    //   <Row  >
-    //     <Col md={{offset:3, span:6}}><AddProductFormic /></Col>
-    //    </Row>
-    //   <Row>
-    //     <Col ><Footer /></Col>
-    //   </Row>
-    // </Container>
+          <Route path="/products/:category/:subcategory" component={SubcategoryProducts} />
 
-    // //AddProduct
-    // <Container fluid>
-    //   <Row>
-    //     <Col><NavigationControls /></Col>
-    //   </Row>
+          <Route path="/" component={Home} />
 
-    //   <Row  >
-    //     <Col md={{offset:3, span:6}}><AddProduct /></Col>
-    //    </Row>
-    //   <Row>
-    //     <Col ><Footer /></Col>
-    //   </Row>
-    // </Container>
+        </Switch>
 
-    // //Register Page
-    // <Container fluid>
-    //   <Row>
-    //     <Col><NavigationControls /></Col>
-    //   </Row>
-    //   <Row>
-    //     <Col><CategoryNavbar /></Col>
-    //   </Row>
-    //   <Row  >
-    //     <Col md={{ offset: 2, span: 8 }}><Register /></Col>
-    //   </Row>
-    //   <Row>
-    //     <Col ><Footer /></Col>
-    //   </Row>
-    // </Container>
-
-    // //Login Page
-    // <Container fluid>
-    //   <Row>
-    //     <Col><NavigationControls /></Col>
-    //   </Row>
-    //   <Row>
-    //     <Col><CategoryNavbar /></Col>
-    //   </Row>
-    //   <Row  >
-    //     <Col md={{ offset: 2, span: 8 }}><Login /></Col>
-    //   </Row>
-    //   <Row>
-    //     <Col ><Footer /></Col>
-    //   </Row>
-    // </Container>
-
-
-    // //Home Page
-    //     <Container fluid>
-    //       <Row>
-    //         <Col><NavigationControls /></Col>
-    //       </Row>
-    //       <Row>
-    //         <Col><CategoryNavbar /></Col>
-    //       </Row>
-    //       <Row  >
-    //         <Col md={2}><AsideNavbar /></Col>
-    //         <Col md={10}><Miel /> </Col>
-    //       </Row>
-    //       <Row>
-    //         <Col><Footer /></Col>
-    //       </Row>
-    //     </Container>
-
+        <Footer />
+      </BrowserRouter>
+    </AuthContext.Provider>
   );
 }
 

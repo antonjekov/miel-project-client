@@ -10,6 +10,26 @@ const productService = {
           });
     },
     
+    getAll: ()=>{
+        return fetch(`http://localhost:3006/products`, {
+            method: 'GET',
+            credentials: 'include'
+          });
+    },
+
+    getAllWithCatSubcat: (category,subcategory)=>{
+        return fetch(`http://localhost:3006/products/${category}/${subcategory}`, {
+            method: 'GET',
+            credentials: 'include'
+          });
+    },
+
+    delete: (productId)=>{
+        return fetch(`http://localhost:3006/products-delete/${productId}`, {
+            method: 'GET',
+            credentials: 'include'
+          });
+    }
 };
 
 export default productService

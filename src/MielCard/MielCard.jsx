@@ -1,19 +1,17 @@
 import React from "react";
 import { Card } from 'react-bootstrap';
 import styles from './MielCard.module.css';
-import honeyJar from "./honeyJar.jpg";
 
-function MielCard (){
+function MielCard (props){
+
 return (
-<Card border="warning"  style={{ width: '18rem' }}>
-  <Card.Img variant="top" src={honeyJar} />
+<Card border="warning"  style={{ width: '15rem', height: '15rem'}}>
+  <Card.Img variant="top" src={props.subcategory.imageUrl} />
   <Card.Body>
-    <Card.Title>Card Title</Card.Title>
-    <Card.Text>
-      Some quick example text to build on the card title and make up the bulk of
-      the card's content.
-    </Card.Text>
-    <Card.Link className={styles.CardLink} href="#">Akacia</Card.Link>
+    {/* <Card.Text>
+      {props.subcategory.description}
+    </Card.Text> */}
+    <Card.Link className={styles.CardLink} href={`products/${props.category.name}/${props.subcategory.name}`} >{props.subcategory.name}</Card.Link>
   </Card.Body>
 </Card>
 );

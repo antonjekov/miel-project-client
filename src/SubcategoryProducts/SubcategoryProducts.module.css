@@ -1,8 +1,5 @@
-.CategoryImage{
+.SubcategoryImage{
+    height: 20%;
     border-bottom: solid 5px orange;
     margin-bottom: 1em;
-}
-
-.CategoryImage img{
-    height: 15rem;
 }

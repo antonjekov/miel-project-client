@@ -1,20 +1,29 @@
-import { Form, Button, Col, Image, Spinner } from 'react-bootstrap';
+import { Form, Button, Col, Image, Spinner, Alert } from 'react-bootstrap';
 import styles from './AddProduct.module.css';
-import React, { useState, useCallback } from 'react';
+import React, { useState, useCallback, useEffect, Fragment } from 'react';
 import { useFormik } from "formik";
 import productSchema from "../schemas/productSchema";
 import { useDropzone } from 'react-dropzone'
 import productService from "../services/product_service";
+import categoryService from "../services/category_service";
+import NavigationControls from "../NavigacionControls/NavigationControls";
+import CategoryNavbar from "../CategoryNavbar/CategoryNavbar";
+
 const CLOUDINARY_UPLOAD_PRESET = 'k21wtmfa';
 const CLOUDINARY_UPLOAD_URL = 'https://api.cloudinary.com/v1_1/mielproject/image/upload';
 
 function AddProductFormic(props) {
+
     //Other hooks
     const [uploadedFileCloudinaryUrl, SetUploadedFileCloudinaryUrl] = useState('');
     const [imageUrlError, SetImageUrlError] = useState('')
     const [isLoading, setIsLoading] = useState(false);
+    const [categories, setCategories] = useState([]);
+    const [subcategoryOptions, setSubcategoryOptions] = useState(null);
+    const [show, setShow] = useState(false);
+
     //Formik integration hook
-    const { handleSubmit, handleChange, errors, values } = useFormik({
+    const { handleSubmit, handleChange, errors, values, setFieldValue } = useFormik({
         initialValues: {
             name: '',
             category: '',
@@ -37,9 +46,9 @@ function AddProductFormic(props) {
                     return
                 }
                 setIsLoading(false);
-                // const userInfo = await res.json();
-                // props.setUserName(userInfo.name);
-                // setLoginSuccess(true);
+                actions.resetForm();
+                SetUploadedFileCloudinaryUrl('')
+                setShow(true)
             })
                 .catch(err => {
                     console.log(err)//TO DO Must have global handler page for Server errors ...
@@ -51,10 +60,9 @@ function AddProductFormic(props) {
     const onDrop = useCallback(acceptedFiles => {
         handleImageUpload(acceptedFiles[0]);
     }, [])
-    const { getRootProps, getInputProps, isDragActive } = useDropzone({
+    const { getRootProps, getInputProps } = useDropzone({
         accept: 'image/jpeg, image/png', multiple: false, onDrop
     })
-    
 
     const handleImageUpload = (file) => {
         const formData = new FormData();
@@ -78,109 +86,134 @@ function AddProductFormic(props) {
             });
     }
 
+    //useEffect hooks
+    useEffect(() => {
+        function fetchData() {
+            categoryService.getAll().then(res => res.json()).then(res => setCategories(res))
+        }
+        fetchData()
+    }, [])
+
+    useEffect(() => {
+        //Clear value for prevent to be choosed subcategory that not exist if we change category.
+        setFieldValue("subcategory", '')
+        async function fetchData() {
+            let result = categories.find(x => x.name === values.category)
+            if (result) {
+                const options = result.subcategories.map(x => <option key={x._id}>{x.name}</option>)
+                setSubcategoryOptions(options);
+            }
+        }
+        fetchData()
+    }, [values.category,categories,setFieldValue])
+
+    let categoryOptions = categories.map(category => <option key={category._id}>{category.name}</option>)
+
     return (
-        <div className={styles.AddProduct}>
-            <div>
-                <h1>
-                    Add Product
+        <Col md={{ offset: 3, span: 6 }}>
+            <div className={styles.AddProduct}>
+                <div>
+                    <h1>
+                        Add Product
                 </h1>
-            </div>
-            <Form onSubmit={handleSubmit}>
-                <Form.Row>
-                    <Col>
-                        <Form.Group >
-                            <Form.Label>Product name</Form.Label>
-                            <Form.Control className={styles['form-control']} type="text" placeholder="Product name" name='name' value={values.name} onChange={handleChange} isInvalid={!!errors.name} isValid={values.name && !errors.name} />
-                            <Form.Control.Feedback type='invalid' >{errors.name}</Form.Control.Feedback>
-                            <Form.Control.Feedback type='valid'>Look's good</Form.Control.Feedback>
-                        </Form.Group>
-                    </Col>
-                </Form.Row>
+                </div>
+                <Alert variant="success" show={show} onClose={() => setShow(false)} dismissible='true'>
+                    <Alert.Heading>Product successfuly added !</Alert.Heading>
+                </Alert>
+                <Form onSubmit={handleSubmit}>
+                    <Form.Row>
+                        <Col>
+                            <Form.Group >
+                                <Form.Label>Product name</Form.Label>
+                                <Form.Control className={styles['form-control']} type="text" placeholder="Product name" name='name' value={values.name} onChange={handleChange} isInvalid={!!errors.name} isValid={values.name && !errors.name} />
+                                <Form.Control.Feedback type='invalid' >{errors.name}</Form.Control.Feedback>
+                                <Form.Control.Feedback type='valid'>Look's good</Form.Control.Feedback>
+                            </Form.Group>
+                        </Col>
+                    </Form.Row>
 
-                <Form.Row>
-                    <Col>
-                        <Form.Group >
-                            <Form.Label>Category</Form.Label>
-                            <Form.Control className={styles['form-control']} as="select" value={values.category} name='category' onChange={handleChange} isInvalid={!!errors.category} isValid={values.category && !errors.category}>
-                                <option></option>
-                                <option>HONEY</option>
-                                <option>APITHERAPY</option>
-                                <option>COSMETIC</option>
-                                <option>OTHER BEE PRODUCTS</option>
-                            </Form.Control>
-                            <Form.Control.Feedback type='invalid' >{errors.category}</Form.Control.Feedback>
+                    <Form.Row>
+                        <Col>
+                            <Form.Group >
+                                <Form.Label>Category</Form.Label>
+                                <Form.Control className={styles['form-control']} as="select" value={values.category} name='category' onChange={handleChange} isInvalid={!!errors.category} isValid={values.category && !errors.category}>
+                                    <option></option>
+                                    {categoryOptions}
+                                </Form.Control>
+                                <Form.Control.Feedback type='invalid' >{errors.category}</Form.Control.Feedback>
+                                <Form.Control.Feedback type='valid'>Look's good</Form.Control.Feedback>
+                            </Form.Group>
+                        </Col>
+                        <Col>
+                            <Form.Group >
+                                <Form.Label>Subcategory</Form.Label>
+                                <Form.Control className={styles['form-control']} as="select" value={values.subcategory} name='subcategory' onChange={handleChange} isInvalid={!!errors.subcategory} isValid={values.subcategory && !errors.subcategory}>
+                                    <option></option>
+                                    {subcategoryOptions}
+                                </Form.Control>
+                                <Form.Control.Feedback type='invalid' >{errors.subcategory}</Form.Control.Feedback>
+                                <Form.Control.Feedback type='valid'>Look's good</Form.Control.Feedback>
+                            </Form.Group>
+                        </Col>
+                        <Col>
+                            <Form.Group >
+                                <Form.Label>Price</Form.Label>
+                                <Form.Control className={styles['form-control']} type="number" name='price' value={values.price} onChange={handleChange} isInvalid={!!errors.price} isValid={values.price && !errors.price} />
+                            </Form.Group>
+                            <Form.Control.Feedback type='invalid'>{errors.price}</Form.Control.Feedback>
                             <Form.Control.Feedback type='valid'>Look's good</Form.Control.Feedback>
-                        </Form.Group>
-                    </Col>
-                    <Col>
-                        <Form.Group >
-                            <Form.Label>Subcategory</Form.Label>
-                            <Form.Control className={styles['form-control']} as="select" value={values.subcategory} name='subcategory' onChange={handleChange} isInvalid={!!errors.subcategory} isValid={values.subcategory && !errors.subcategory}>
-                                <option></option>
-                                <option>Mountain</option>
-                                <option>Flowers</option>
-                            </Form.Control>
-                            <Form.Control.Feedback type='invalid' >{errors.subcategory}</Form.Control.Feedback>
-                            <Form.Control.Feedback type='valid'>Look's good</Form.Control.Feedback>
-                        </Form.Group>
-                    </Col>
-                    <Col>
-                        <Form.Group >
-                            <Form.Label>Price</Form.Label>
-                            <Form.Control className={styles['form-control']} type="number" name='price' value={values.price} onChange={handleChange} isInvalid={!!errors.price} isValid={values.price && !errors.price} />
-                        </Form.Group>
-                        <Form.Control.Feedback type='invalid'>{errors.price}</Form.Control.Feedback>
-                        <Form.Control.Feedback type='valid'>Look's good</Form.Control.Feedback>
-                    </Col>
-                    <Col>
-                        <Form.Group >
-                            <Form.Label>Availability</Form.Label>
-                            <Form.Control className={styles['form-control']} as="select" name='availability' value={values.availability} onChange={handleChange} isInvalid={!!errors.availability} isValid={values.availability && !errors.availability}>
-                                <option></option>
-                                <option>Available</option>
-                                <option>Not available</option>
-                            </Form.Control>
-                            <Form.Control.Feedback type='invalid' >{errors.availability}</Form.Control.Feedback>
-                            <Form.Control.Feedback type='valid'>Look's good</Form.Control.Feedback>
-                        </Form.Group>
-                    </Col>
-                </Form.Row>
+                        </Col>
+                        <Col>
+                            <Form.Group >
+                                <Form.Label>Availability</Form.Label>
+                                <Form.Control className={styles['form-control']} as="select" name='availability' value={values.availability} onChange={handleChange} isInvalid={!!errors.availability} isValid={values.availability && !errors.availability}>
+                                    <option></option>
+                                    <option>Available</option>
+                                    <option>Not available</option>
+                                </Form.Control>
+                                <Form.Control.Feedback type='invalid' >{errors.availability}</Form.Control.Feedback>
+                                <Form.Control.Feedback type='valid'>Look's good</Form.Control.Feedback>
+                            </Form.Group>
+                        </Col>
+                    </Form.Row>
 
-                <Form.Row>
-                    <Col>
-                        <div>
-                            <div className={styles['drop-zone']} {...getRootProps()}>
-                                <input  {...getInputProps()} />
+                    <Form.Row>
+                        <Col>
+                            <div>
+                                <div className={styles['drop-zone']} {...getRootProps()}>
+                                    <input  {...getInputProps()} />
                                 Click to select image or drag it here.
                             </div>
-                            <br></br>
-                            <div>
-                                {isLoading ? <Spinner animation="border" variant="warning" /> : null}
-                                {uploadedFileCloudinaryUrl === '' ? null :
-                                    <div>
-                                        <Image src={uploadedFileCloudinaryUrl} height="160" width="160" thumbnail />
-                                    </div>}
+                                <br></br>
+                                <div>
+                                    {isLoading ? <Spinner animation="border" variant="warning" /> : null}
+                                    {uploadedFileCloudinaryUrl === '' ? null :
+                                        <div>
+                                            <Image src={uploadedFileCloudinaryUrl} height="160" width="160" thumbnail />
+                                        </div>}
+                                </div>
+                                <br></br>
                             </div>
-                            <br></br>
-                        </div>
-                    </Col>
-                    <Col>
-                        <Form.Control disabled={true} className={styles['form-control']} type="text" placeholder="Image Url" value={uploadedFileCloudinaryUrl} isInvalid={!uploadedFileCloudinaryUrl} isValid={uploadedFileCloudinaryUrl} />
-                        <Form.Control.Feedback type='invalid' >{imageUrlError}</Form.Control.Feedback>
-                        <Form.Control.Feedback type='valid'>Look's good</Form.Control.Feedback>
-                    </Col>
-                </Form.Row>
+                        </Col>
+                        <Col>
+                            <Form.Control disabled={true} className={styles['form-control']} type="text" placeholder="Image Url" value={uploadedFileCloudinaryUrl} isInvalid={!uploadedFileCloudinaryUrl} isValid={uploadedFileCloudinaryUrl} />
+                            <Form.Control.Feedback type='invalid' >{imageUrlError}</Form.Control.Feedback>
+                            <Form.Control.Feedback type='valid'>Look's good</Form.Control.Feedback>
+                        </Col>
+                    </Form.Row>
 
-                <Form.Row>
-                    <Col>
-                        <Button variant="warning" type="submit">
-                            Add Product
+                    <Form.Row>
+                        <Col>
+                            <Button variant="warning" type="submit">
+                                Add Product
                         </Button>
-                    </Col>
+                        </Col>
 
-                </Form.Row>
-            </Form>
-        </div>
+                    </Form.Row>
+                </Form>
+            </div>
+        </Col>
+        
     );
 }
 

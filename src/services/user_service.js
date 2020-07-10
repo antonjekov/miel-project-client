@@ -26,6 +26,39 @@ const userService = {
             method: 'POST',
             credentials: 'include'            
           });
+    },
+
+    shoppingCartGet: (data)=>{
+        let headers = new Headers();
+        headers.append("Content-Type", "application/json");
+        return fetch(`http://localhost:3006/shoppingCard/get`, {
+            method: 'POST',
+            headers:headers,
+            body: JSON.stringify(data),
+            credentials: 'include'
+          });        
+    },
+
+    shoppingCardAdd: (data)=>{
+        let headers = new Headers();
+        headers.append("Content-Type", "application/json");
+        return fetch(`http://localhost:3006/shoppingCard/add`, {
+            method: 'POST',
+            headers:headers,
+            body: JSON.stringify(data),
+            credentials: 'include'
+          });        
+    },
+
+    deleteFromShoppingCard: (data)=>{
+        let headers = new Headers();
+        headers.append("Content-Type", "application/json");
+        return fetch(`http://localhost:3006/shoppingCard/delete`, {
+            method: 'POST',
+            headers:headers,
+            body: JSON.stringify(data),
+            credentials: 'include'
+          });        
     }
 };
 

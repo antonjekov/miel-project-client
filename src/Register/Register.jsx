@@ -5,10 +5,12 @@ import userService from "../services/user_service";
 import userSchema from "../schemas/userSchema";
 import { useFormik } from "formik";
 import { Redirect } from "react-router-dom";
+import { useAuth } from "../contexts/Auth";
 
 function Register(props) {
     const [isLoading, setIsLoading] = useState(false);
     const [loginSuccess, setLoginSuccess] = useState(false);
+    const contextAuth = useAuth();
 
     //Formik integration hook
     const { handleSubmit, handleChange, errors, values } = useFormik({
@@ -40,6 +42,7 @@ function Register(props) {
     });
 
     return (loginSuccess ? <Redirect to='/login' /> :
+    <Col md={{ offset: 2, span: 8 }}>
         <div className={styles.Register}>
             <Form onSubmit={handleSubmit}>
                 <div>
@@ -93,6 +96,8 @@ function Register(props) {
                 </Form.Text>
             </Form>
         </div>
+    </Col>
+        
     );
 }
 

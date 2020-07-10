@@ -2,16 +2,18 @@ import React from "react";
 import { Nav } from 'react-bootstrap';
 import styles from './AsideNavbar.module.css';
 
-function AsideNavbar() {
+
+function AsideNavbar(props) {
+    const category = props.category
+    const subcategories = props.subcategories;
+    
+    const allSubcategories = subcategories.map(subcategory =><Nav.Link className={styles.navLink} key={subcategory._id} href={`products/${category}/${subcategory.name}`}>{subcategory.name}</Nav.Link>);
+
     return (
         <Nav  className="flex-column" >
-            <Nav.Link id={styles.navTitle} disabled>HONEY</Nav.Link>
+            <Nav.Link id={styles.navTitle} disabled>{category.toUpperCase()}</Nav.Link>
             <br></br>
-            <Nav.Link href="#miel/acacia">Acacia</Nav.Link>
-            <Nav.Link className={styles.navLink} href="#miel/pino/">Pino</Nav.Link>
-            <Nav.Link className={styles.navLink} href="#miel/mountain">Mountain</Nav.Link>
-            <Nav.Link className={styles.navLink} href="#miel/tila">Tila</Nav.Link>
-            <Nav.Link className={styles.navLink} href="#miel/bosque">Bosque</Nav.Link>
+            {allSubcategories}
         </Nav>
         
     );

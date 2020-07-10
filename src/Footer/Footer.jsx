@@ -3,7 +3,7 @@ import styles from './Footer.module.css';
 function Footer(props) {
 
     return (
-        <footer className="fixed-bottom">
+        <footer >
             <div className={styles.Footer}>
             <p>Anton Zhekov SoftUni project &#169; 2020</p>
             </div>            

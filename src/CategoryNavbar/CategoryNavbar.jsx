@@ -1,16 +1,23 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Navbar, Nav } from 'react-bootstrap';
 import styles from './CategoryNavbar.module.css';
+import categoryService from "../services/category_service";
 
 function CategoryNavbar() {
-    return (<Navbar bg="light" expand="lg"  className="justify-content-center">
-        
-        <Nav.Link className={styles.navLink} href="#miel">MIEL</Nav.Link>
-        <Nav.Link className={styles.navLink} href="#polen">APITHERAPY</Nav.Link>
-        <Nav.Link className={styles.navLink} href="#propolis">COSMETIC</Nav.Link>
-        <Nav.Link className={styles.navLink} href="#cosmetica">OTHER BEE PRODUCTS</Nav.Link>
-        
+    const [categories, setCategories] = useState([]);
+    useEffect(() => {
+        async function fetchData() {
+            let result = await categoryService.getAll().then(res => res.json())
+            setCategories(result)
+        }
 
+        fetchData()
+    }, []);
+
+    const allCategories = categories.map(category => <Nav.Link key={category._id} className={styles.navLink} href={`/${category.name.toLowerCase()}`}>{category.name.toUpperCase()}</Nav.Link>);
+
+    return (<Navbar bg="light" expand="lg" className="justify-content-center">
+        {allCategories}
     </Navbar>);
 }
 

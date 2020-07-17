@@ -3,23 +3,21 @@ import styles from './AddSubcategory.module.css';
 import React, { useState, useCallback, useEffect } from 'react';
 import { useFormik } from "formik";
 import subcategorySchema from "../schemas/subcategorySchema";
-import categoryService from "../services/category_service";
 import subcategoryService from "../services/subcategory_service";
 import { useDropzone } from 'react-dropzone'
 import {useHistory } from "react-router-dom";
-//import { useAuth } from "../contexts/Auth";
+import { useAuth } from "../contexts/Auth";
 
 const CLOUDINARY_UPLOAD_PRESET = process.env.REACT_APP_CLOUDINARY_UPLOAD_PRESET;
 const CLOUDINARY_UPLOAD_URL = process.env.REACT_APP_CLOUDINARY_UPLOAD_URL;
 function AddSubcategory(props) {
 
     //Other hooks
-    //const {userInfo} = useAuth();
+    const {categories} = useAuth();
     const history = useHistory()
     const [uploadedFileCloudinaryUrl, SetUploadedFileCloudinaryUrl] = useState('');
     const [imageUrlError, SetImageUrlError] = useState('')
     const [isLoading, setIsLoading] = useState(false);
-    const [categories, setCategories] = useState([]);
     const [show, setShow] = useState(false);
 
     //Formik integration hook
@@ -91,15 +89,6 @@ function AddSubcategory(props) {
             });
     }
 
-
-    //useEffect hooks
-    useEffect(() => {
-        function fetchData() {
-            categoryService.getAll().then(res => res.json()).then(res => setCategories(res))
-        }
-        fetchData()
-    }, [])
-
     let categoryOptions = categories.map(category => <option key={category._id}>{category.name}</option>)
 
     return (
@@ -111,7 +100,7 @@ function AddSubcategory(props) {
                 </h1>
             </div>
             <Alert variant="success" show={show} onClose={() => setShow(false)} dismissible='true'>
-                <Alert.Heading>Category successfuly added !</Alert.Heading>
+                <Alert.Heading>Subcategory successfuly added !</Alert.Heading>
             </Alert>
             <Form onSubmit={handleSubmit}>
                 <Form.Row>

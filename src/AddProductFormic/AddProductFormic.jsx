@@ -5,21 +5,16 @@ import { useFormik } from "formik";
 import productSchema from "../schemas/productSchema";
 import { useDropzone } from 'react-dropzone'
 import productService from "../services/product_service";
-import categoryService from "../services/category_service";
-import { useHistory } from "react-router-dom";
-
-
-const CLOUDINARY_UPLOAD_PRESET = process.env.REACT_APP_CLOUDINARY_UPLOAD_PRESET;
-const CLOUDINARY_UPLOAD_URL = process.env.REACT_APP_CLOUDINARY_UPLOAD_URL;
+import { useAuth } from "../contexts/Auth";
+import claudinaryService from "../services/claudinaryService";
 
 function AddProductFormic(props) {
-    
+
     //Other hooks
-    const history = useHistory()
+    const { categories } = useAuth();
     const [uploadedFileCloudinaryUrl, SetUploadedFileCloudinaryUrl] = useState('');
     const [imageUrlError, SetImageUrlError] = useState('')
     const [isLoading, setIsLoading] = useState(false);
-    const [categories, setCategories] = useState([]);
     const [subcategoryOptions, setSubcategoryOptions] = useState(null);
     const [show, setShow] = useState(false);
 
@@ -40,17 +35,12 @@ function AddProductFormic(props) {
             }
             values['imageUrl'] = uploadedFileCloudinaryUrl;
             productService.add(values).then(async res => {
-                if (res.status===401) {
-                    history.push('/login')
-                    return
-                }
-                if (res.status===422) {
+                if (!res.ok) {
                     setIsLoading(false);
                     const errorsObject = await res.json()
                     actions.setErrors(errorsObject)
                     return
                 }
-                //Place to catch status 500
                 setIsLoading(false);
                 actions.resetForm();
                 SetUploadedFileCloudinaryUrl('')
@@ -69,35 +59,13 @@ function AddProductFormic(props) {
         accept: 'image/jpeg, image/png', multiple: false, onDrop
     })
 
-    const handleImageUpload = (file) => {
-        const formData = new FormData();
-        formData.append("file", file);
-        formData.append("upload_preset", CLOUDINARY_UPLOAD_PRESET);
+    const handleImageUpload = async (file) => {
         setIsLoading(true);
-        fetch(CLOUDINARY_UPLOAD_URL, {
-            method: 'POST',
-            body: formData
-        })
-            .then(response => response.json())
-            .then(data => {
-                if (data.secure_url !== '') {
-                    SetUploadedFileCloudinaryUrl(data.secure_url);
-                    setIsLoading(false);
-                }
-            })
-            .catch(() => {
-                SetImageUrlError('File to upload image. Please try again.');
-                setIsLoading(false)
-            });
+        const { url, error } = await claudinaryService.upload(file)
+        setIsLoading(false)
+        url && SetUploadedFileCloudinaryUrl(url);
+        error && SetImageUrlError(error);
     }
-
-    //useEffect hooks
-    useEffect(() => {
-        function fetchData() {
-            categoryService.getAll().then(res => res.json()).then(res => setCategories(res))
-        }
-        fetchData()
-    }, [])
 
     useEffect(() => {
         //Clear value for prevent to be choosed subcategory that not exist if we change category.
@@ -110,18 +78,14 @@ function AddProductFormic(props) {
             }
         }
         fetchData()
-    }, [values.category,categories,setFieldValue])
+    }, [values.category, categories, setFieldValue])
 
     let categoryOptions = categories.map(category => <option key={category._id}>{category.name}</option>)
 
     return (
         <Col md={{ offset: 3, span: 6 }}>
             <div className={styles.AddProduct}>
-                <div>
-                    <h1>
-                        Add Product
-                </h1>
-                </div>
+                <h1>Add Product</h1>
                 <Alert variant="success" show={show} onClose={() => setShow(false)} dismissible='true'>
                     <Alert.Heading>Product successfuly added !</Alert.Heading>
                 </Alert>
@@ -213,11 +177,11 @@ function AddProductFormic(props) {
                                 Add Product
                         </Button>
                         </Col>
-
                     </Form.Row>
                 </Form>
             </div>
-        </Col>        
+        </Col>
+
     );
 }
 

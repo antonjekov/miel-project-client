@@ -1,20 +1,21 @@
 import { Form, Button, Col, Image, Spinner, Alert } from 'react-bootstrap';
 import styles from './AddProduct.module.css';
-import React, { useState, useCallback, useEffect, Fragment } from 'react';
+import React, { useState, useCallback, useEffect } from 'react';
 import { useFormik } from "formik";
 import productSchema from "../schemas/productSchema";
 import { useDropzone } from 'react-dropzone'
 import productService from "../services/product_service";
 import categoryService from "../services/category_service";
-import NavigationControls from "../NavigacionControls/NavigationControls";
-import CategoryNavbar from "../CategoryNavbar/CategoryNavbar";
+import { useHistory } from "react-router-dom";
 
-const CLOUDINARY_UPLOAD_PRESET = 'k21wtmfa';
-const CLOUDINARY_UPLOAD_URL = 'https://api.cloudinary.com/v1_1/mielproject/image/upload';
+
+const CLOUDINARY_UPLOAD_PRESET = process.env.REACT_APP_CLOUDINARY_UPLOAD_PRESET;
+const CLOUDINARY_UPLOAD_URL = process.env.REACT_APP_CLOUDINARY_UPLOAD_URL;
 
 function AddProductFormic(props) {
-
+    
     //Other hooks
+    const history = useHistory()
     const [uploadedFileCloudinaryUrl, SetUploadedFileCloudinaryUrl] = useState('');
     const [imageUrlError, SetImageUrlError] = useState('')
     const [isLoading, setIsLoading] = useState(false);
@@ -39,12 +40,17 @@ function AddProductFormic(props) {
             }
             values['imageUrl'] = uploadedFileCloudinaryUrl;
             productService.add(values).then(async res => {
-                if (!res.ok) {
+                if (res.status===401) {
+                    history.push('/login')
+                    return
+                }
+                if (res.status===422) {
                     setIsLoading(false);
                     const errorsObject = await res.json()
                     actions.setErrors(errorsObject)
                     return
                 }
+                //Place to catch status 500
                 setIsLoading(false);
                 actions.resetForm();
                 SetUploadedFileCloudinaryUrl('')
@@ -52,8 +58,7 @@ function AddProductFormic(props) {
             })
                 .catch(err => {
                     console.log(err)//TO DO Must have global handler page for Server errors ...
-                });;
-            console.log(values);
+                });
         }
     });
     //Dropzone integration hook
@@ -212,8 +217,7 @@ function AddProductFormic(props) {
                     </Form.Row>
                 </Form>
             </div>
-        </Col>
-        
+        </Col>        
     );
 }
 

@@ -1,5 +1,12 @@
-.SubcategoryImage{
-    height: 20%;
+.Subcategory{
     border-bottom: solid 5px orange;
     margin-bottom: 1em;
+}
+
+.CardColumns{
+    padding: 1em;
+}
+
+.SubcategoryImg{
+    height: 10rem;
 }

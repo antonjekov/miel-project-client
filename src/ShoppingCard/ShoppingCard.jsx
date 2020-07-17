@@ -1,57 +1,58 @@
-import React, { Fragment, useEffect } from "react";
-import { Container, Image, Col, Row, Button } from 'react-bootstrap';
+import React, { Fragment, useEffect, useState } from "react";
+import { Container, Col, Row, Button } from 'react-bootstrap';
 import styles from './ShoppingCard.module.css';
 import { useAuth } from "../contexts/Auth";
 import userService from "../services/user_service"
-import { useState } from "react";
+import { useHistory } from "react-router-dom";
+import ProductInShoppingCart from "../ProductInShoppingCart";
 
 
 function ShoppingCard(props) {
 
-    const shipping = 5
-    const { userInfo } = useAuth();
+    const history = useHistory()
+    const { setUserInfo } = useAuth();
     const [productsInCart, setProductsInCart] = useState([])
+    const userReducer = (array)=>{
+        const reduced = array.reduce((acc, curr) => {
+           const existingProduct = acc.find(x => x._id.toString() === curr._id.toString());
+            existingProduct ? existingProduct.quantity++ : acc.push({ ...curr, quantity: 1 })
+            return acc;
+        }, []);
+        return reduced
+    }
     
-    console.log(productsInCart)
-
     useEffect(() => {
-        function fetchData() {
-            userService.shoppingCartGet({ userId: userInfo._id }).then(res => res.json()).then(res => setProductsInCart(res))
+        async function fetchData() {
+            const res = await userService.shoppingCartGet();
+            if (res.status===401) {
+                history.push('/login')
+                return
+            }
+            const resObject = await res.json();
+            const reduced =userReducer(resObject);
+            return setProductsInCart(reduced);               
         }
-        fetchData()
-    }, [])
+        fetchData()        
+    }, [history])
     
     const subtotal = productsInCart.reduce((acc, curr) => {
-        acc += curr.price
+        acc += curr.price * curr.quantity
         return acc
     }, 0)
-
-
-    const products = productsInCart.map(product => {
-
-        const deleteFromCart = async () => {
-            await userService.deleteFromShoppingCard({ userId: userInfo._id, productId: product._id });
-            console.log(window.location)
-            window.location.reload(false)
+    const shipping = 5;
+    
+    const checkout = async () => {
+        const res = await userService.shoppingCartCheckout();
+        if (res.status===401) {
+            history.push('/login')
+            return
         }
+        const user = await res.json()
+        setUserInfo(user)
+        history.push('/');
+    }
 
-        return (<Row key={product._id}>
-            <Col md={2}>
-                <Image className={styles.ProductImage} src={product.imageUrl} thumbnail />
-            </Col>
-            <Col md={4}>
-                <span>{product.name}</span>
-            </Col>
-            <Col md={2}>
-                <span>{product.price.toFixed(2)} EUR</span>
-            </Col>
-            <Col md={1}>
-                <Button variant="secondary" size='sm' onClick={deleteFromCart}>X</Button>
-
-            </Col>
-        </Row>)
-    });
-
+    const products = productsInCart.map(product => <ProductInShoppingCart key={product._id} product={product} />);
 
     return (
         <Fragment>
@@ -61,32 +62,35 @@ function ShoppingCard(props) {
                 </Container>
                 <Row>
                     <Col md={2}>
-                        <Button variant="warning" size='sm' onClick={() => { window.history.back() }}>Continue Shopping</Button>
+                        <Button variant="warning" size='sm' onClick={() => history.goBack()}>Continue Shopping</Button>
                     </Col>
-                    <Col md={{ offset: 4, span: 4 }}>
-                        <table >
-                            <tbody>
-                                <tr>
-                                    <td>Subtotal: </td>
-                                    <td className={styles.right}>{subtotal.toFixed(2)} €</td>
-                                </tr>
-                                <tr>
-                                    <td>Shipping: </td>
-                                    <td className={styles.right}>{shipping.toFixed(2)} €</td>
-                                </tr>
-                                <tr>
-                                    <th>Total: </th>
-                                    <th className={styles.right}>{(subtotal + shipping).toFixed(2)} €</th>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </Col>
-                    <Col md={2}>
-                        <Button variant="danger" size='sm' onClick={() => { window.history.back() }}>Checkout</Button>
-                    </Col>
+                    {subtotal ?
+                        <Fragment>
+                            <Col md={{ offset: 4, span: 4 }}>
+                                <table >
+                                    <tbody>
+                                        <tr>
+                                            <td>Subtotal: </td>
+                                            <td className={styles.right}>{subtotal.toFixed(2)} €</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Shipping: </td>
+                                            <td className={styles.right}>{shipping.toFixed(2)} €</td>
+                                        </tr>
+                                        <tr>
+                                            <th>Total: </th>
+                                            <th className={styles.right}>{(subtotal + shipping).toFixed(2)} €</th>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </Col>
+                            <Col md={2}>
+                                <Button variant="danger" size='sm' onClick={checkout}>Checkout</Button>
+                            </Col>
+                        </Fragment> : ''
+                    }
                 </Row>
             </Col>
-
         </Fragment>
     )
 }

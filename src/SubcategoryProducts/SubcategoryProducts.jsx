@@ -1,9 +1,10 @@
 import React, { useState, useEffect, Fragment } from 'react';
 import styles from './SubcategoryProducts.module.css';
 import ProductCard from "../PoductCard/ProductCard";
-import {CardColumns, Col, Row } from 'react-bootstrap';
+import { CardColumns, Col, Row } from 'react-bootstrap';
 import productService from "../services/product_service";
 import subcategoryService from '../services/subcategory_service';
+import AsideNavbar from '../AsideNavbar';
 
 
 function SubcategoryProducts(props) {
@@ -12,9 +13,20 @@ function SubcategoryProducts(props) {
     const subcategory = props.match.params.subcategory;
     const [products, SetProducts] = useState([]);
     const [subcategoryInfo, SetSubcategoryInfo] = useState({})
+    const [subcategories, setSubcategories] = useState([]);
+    useEffect(() => {
+        const fetchData = async () => {
+            let result = await subcategoryService.getByCategory(category).then(res => res.json())
+            setSubcategories(result)
+        }
+
+        fetchData()
+    }, [category]);
+
+
     useEffect(() => {
         async function fetchData() {
-            const allProducts = await productService.getAllWithCatSubcat(category,subcategory).then(res=>res.json());
+            const allProducts = await productService.getAllWithCatSubcat(category, subcategory).then(res => res.json());
             SetProducts(allProducts)
         }
         fetchData()
@@ -29,21 +41,27 @@ function SubcategoryProducts(props) {
     }, [category, subcategory])
 
     return (
-        
+
         <Fragment >
-            <Row className={styles.SubcategoryImage}>
-                <Col md={{ offset: 4, span: 2 }}>
-                    <img src={subcategoryInfo.imageUrl} alt="Subcategory"></img>
-                </Col>
-                <Col md={{ span: 2 }}>
-                        {subcategoryInfo.description}                    
+            <Row>
+                <Col md={2}><AsideNavbar categoryName={category} subcategories={subcategories} /></Col>
+                <Col md={10}>
+                    <Row className={styles.Subcategory}>
+                        <Col md={{ offset: 4, span: 2 }}>
+                            <img className={styles.SubcategoryImg} src={subcategoryInfo.imageUrl} alt="Subcategory"></img>
+                        </Col>
+                        <Col md={{ span: 2 }}>
+                            <p >{subcategoryInfo.description}</p>
+                        </Col>
+                    </Row>
+                    <Row>
+                        <CardColumns className={styles.CardColumns}>
+                            {products.map(product => <ProductCard key={product._id} product={product} />)}
+                        </CardColumns>
+                    </Row>
                 </Col>
             </Row>
-            
-                <CardColumns>
-                    {products.map(product => <ProductCard key={product._id} product={product} />)}
-                </CardColumns>
-            
+
         </Fragment>
 
     );

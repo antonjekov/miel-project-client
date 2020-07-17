@@ -28,13 +28,22 @@ const userService = {
           });
     },
 
-    shoppingCartGet: (data)=>{
+    getInfoForUser: ()=>{
+        let headers = new Headers();
+        headers.append("Content-Type", "application/json");
+        return fetch(`http://localhost:3006/user/getInfoForUser`, {
+            method: 'POST',
+            headers:headers,
+            credentials: 'include'
+          }); 
+    },
+
+    shoppingCartGet: ()=>{
         let headers = new Headers();
         headers.append("Content-Type", "application/json");
         return fetch(`http://localhost:3006/shoppingCard/get`, {
             method: 'POST',
             headers:headers,
-            body: JSON.stringify(data),
             credentials: 'include'
           });        
     },
@@ -50,16 +59,40 @@ const userService = {
           });        
     },
 
-    deleteFromShoppingCard: (data)=>{
+    shoppingCartCheckout: (data)=>{
         let headers = new Headers();
         headers.append("Content-Type", "application/json");
-        return fetch(`http://localhost:3006/shoppingCard/delete`, {
+        return fetch(`http://localhost:3006/shoppingCart/checkout`, {
             method: 'POST',
             headers:headers,
             body: JSON.stringify(data),
             credentials: 'include'
           });        
+    },
+
+    deleteAllFromShoppingCart: (data)=>{
+        let headers = new Headers();
+        headers.append("Content-Type", "application/json");
+        return fetch(`http://localhost:3006/shoppingCart/deleteAll`, {
+            method: 'POST',
+            headers:headers,
+            body: JSON.stringify(data),
+            credentials: 'include'
+          });        
+    },
+
+    deleteOneFromShoppingCard: (data)=>{
+        let headers = new Headers();
+        headers.append("Content-Type", "application/json");
+        return fetch(`http://localhost:3006/shoppingCart/deleteOne`, {
+            method: 'POST',
+            headers:headers,
+            body: JSON.stringify(data),
+            credentials: 'include'
+          });    
     }
+
+    
 };
 
 export default userService

@@ -1,22 +1,16 @@
 import { Form, Button, Spinner, Col } from 'react-bootstrap';
 import styles from './Login.module.css';
-import React, { useState, Fragment } from 'react';
+import React, { useState } from 'react';
 import userSchemaLogin from "../schemas/userSchemaLogin";
 import { useFormik } from "formik";
 import userService from "../services/user_service";
-import { Redirect } from "react-router-dom";
-import UserContext from "../contexts/UserContext";
-import NavigationControls from "../NavigacionControls/NavigationControls";
-import Home from "../Home/Home";
-import App from "../App";
 import { useAuth } from "../contexts/Auth";
-
+import { useHistory } from "react-router-dom";
 
 function Login(props) {
-    const {userInfo, setUserInfo} = useAuth();
-    const setUser = props.setUser
+    const history = useHistory()
+    const { setUserInfo } = useAuth();
     const [isLoading, setIsLoading] = useState(false);
-    const [loginSuccess, setLoginSuccess] = useState(false);
     //Formik integration hook
     const { handleSubmit, handleChange, errors, values } = useFormik({
         initialValues: {
@@ -36,19 +30,14 @@ function Login(props) {
                     }
                     setIsLoading(false);
                     const userInfo = await res.json();
-                    //setUser(true);
-                    setUserInfo(userInfo)
-                    setLoginSuccess(true);                   
+                    setUserInfo(userInfo);
+                    history.push('/');
                 })
                 .catch(err => {
                     console.log(err)//TO DO Must have global handler page for Server errors ...
                 });
         }
     });
-
-    if (loginSuccess) {
-        return <Redirect to="/"></Redirect>
-    }
 
     return (
         <Col md={{ offset: 4, span: 4 }}>
@@ -83,7 +72,7 @@ function Login(props) {
                         <Spinner animation="border" variant="warning" /> :
                         <Button variant="warning" type="submit" >Login</Button>}
                     <Form.Text >
-                        Don't have an account? <a href="/register" >Register</a>
+                        Don't have an account? <a href="/register" ><b>Register</b></a>
                     </Form.Text>
                 </Form>
             </div>

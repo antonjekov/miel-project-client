@@ -5,13 +5,11 @@ import userService from "../services/user_service";
 import userSchema from "../schemas/userSchema";
 import { useFormik } from "formik";
 import { Redirect } from "react-router-dom";
-import { useAuth } from "../contexts/Auth";
 
 function Register(props) {
     const [isLoading, setIsLoading] = useState(false);
     const [loginSuccess, setLoginSuccess] = useState(false);
-    const contextAuth = useAuth();
-
+    
     //Formik integration hook
     const { handleSubmit, handleChange, errors, values } = useFormik({
         initialValues: {
@@ -92,7 +90,7 @@ function Register(props) {
                     <Spinner animation="border" variant="warning" /> :
                     <Button variant="warning" type="submit" >Register</Button>}
                 <Form.Text >
-                    Already have an account? <a href="/login" >Login</a>
+                    Already have an account? <a href="/login" ><b>Login</b></a>
                 </Form.Text>
             </Form>
         </div>

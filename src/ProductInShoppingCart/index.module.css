@@ -1,0 +1,12 @@
+.ProductImage {
+    width: 50px;
+    height: 50px;
+}
+
+.Price {
+    text-align: top;
+}
+
+.Bordered {
+border: 1px solid grey;
+}

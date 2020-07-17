@@ -3,7 +3,7 @@ import * as yup from 'yup';
 const productSchema = yup.object().shape({
     name: yup
         .string()
-        .max(100, "Product name must be max 100 chars")
+        .max(60, "Product name must be max 100 chars")
         .min(3, "Product name must be min 3 chars")
         .required("Product name is Required."),
     price: yup

@@ -6,17 +6,16 @@ import subcategorySchema from "../schemas/subcategorySchema";
 import categoryService from "../services/category_service";
 import subcategoryService from "../services/subcategory_service";
 import { useDropzone } from 'react-dropzone'
-import { useAuth } from "../contexts/Auth";
-import { Redirect } from "react-router-dom";
+import {useHistory } from "react-router-dom";
+//import { useAuth } from "../contexts/Auth";
 
-
-const CLOUDINARY_UPLOAD_PRESET = 'k21wtmfa';
-const CLOUDINARY_UPLOAD_URL = 'https://api.cloudinary.com/v1_1/mielproject/image/upload';
+const CLOUDINARY_UPLOAD_PRESET = process.env.REACT_APP_CLOUDINARY_UPLOAD_PRESET;
+const CLOUDINARY_UPLOAD_URL = process.env.REACT_APP_CLOUDINARY_UPLOAD_URL;
 function AddSubcategory(props) {
 
     //Other hooks
-    const contextAuth = useAuth();
-    console.log(contextAuth)
+    //const {userInfo} = useAuth();
+    const history = useHistory()
     const [uploadedFileCloudinaryUrl, SetUploadedFileCloudinaryUrl] = useState('');
     const [imageUrlError, SetImageUrlError] = useState('')
     const [isLoading, setIsLoading] = useState(false);
@@ -40,12 +39,17 @@ function AddSubcategory(props) {
 
             subcategoryService.add(values)
                 .then(async res => {
-                    if (!res.ok) {
+                    if (res.status===401) {
+                        history.push('/login')
+                        return
+                    }
+                    if (res.status===422) {
                         setIsLoading(false);
                         const errorsObject = await res.json()
                         actions.setErrors(errorsObject)
                         return
                     }
+                    //Place to catch status 500
                     setIsLoading(false);
                     actions.resetForm();
                     SetUploadedFileCloudinaryUrl('')
@@ -54,7 +58,6 @@ function AddSubcategory(props) {
                 .catch(err => {
                     console.log(err)//TO DO Must have global handler page for Server errors ...
                 });
-            console.log(values);
         }
     });
 
@@ -98,10 +101,6 @@ function AddSubcategory(props) {
     }, [])
 
     let categoryOptions = categories.map(category => <option key={category._id}>{category.name}</option>)
-
-    if (!contextAuth) {
-        return <Redirect to="/login" />
-    }
 
     return (
         <Col md={{ offset: 3, span: 6 }}>
@@ -181,7 +180,6 @@ function AddSubcategory(props) {
                             Add Subcategory
                         </Button>
                     </Col>
-
                 </Form.Row>
             </Form>
         </div>

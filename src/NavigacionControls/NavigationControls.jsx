@@ -1,8 +1,7 @@
-import React, { useContext, useState, Fragment } from "react";
+import React, {  Fragment } from "react";
 import { Navbar, Nav, Container,Button } from 'react-bootstrap';
 import logo from "./bee.png";
 import styles from './NavigationControls.module.css';
-import UserContext from "../contexts/UserContext";
 import { useAuth } from "../contexts/Auth";
 import userService from "../services/user_service";
 
@@ -22,7 +21,7 @@ function NavigationControls(props) {
 
     return (
 
-        <Navbar bg="light" expand="lg" sticky="top">
+        <Navbar bg="light" expand="lg" >
             <Container className={styles.brand}>
                 <Navbar.Brand href="/">
                     <img
@@ -38,6 +37,7 @@ function NavigationControls(props) {
             <Container className="justify-content-center">
                 {userInfo?
                 <Nav.Link className={styles.navLink} onClick={logout}>Logout</Nav.Link>:
+
                 <Fragment>
                 <Nav.Link className={styles.navLink} href="/login">Login</Nav.Link>
                 <Nav.Link className={styles.navLink} href="/register">Register</Nav.Link> 
@@ -45,7 +45,6 @@ function NavigationControls(props) {
                 }
 
                 <Nav.Link className={styles.navLink} href="/contacts">Contacts</Nav.Link>
-                <Nav.Link className={styles.navLink} href="/articles">Articles</Nav.Link>
 
                 {userInfo&&userInfo.role==='admin'?
                 <Fragment>
@@ -59,7 +58,7 @@ function NavigationControls(props) {
                 <Navbar.Text >Welcome {userInfo.name}</Navbar.Text>
             </Container>):''}
             
-            {userInfo?<Button variant="warning" href="/shoppingCard/add"><b>Shopping cart</b> 0 products</Button>:''}
+            {userInfo&&userInfo.role==='client'?<Button variant="warning" href="/shoppingCard"><b>Shopping cart</b> products <b>{userInfo.shoppingCard.length}</b></Button>:''}
             
         </Navbar>
     );

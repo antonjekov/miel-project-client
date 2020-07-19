@@ -1,7 +1,7 @@
 import React, { Fragment } from "react";
 import { Navbar, Nav } from 'react-bootstrap';
-import styles from './CategoryNavbar.module.css';
-import NavigacionControls from "../NavigacionControls/NavigationControls";
+import styles from './index.module.css';
+import NavigacionControls from "../NavigacionControls";
 import { useAuth } from "../contexts/Auth";
 
 

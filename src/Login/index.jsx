@@ -1,5 +1,5 @@
 import { Form, Button, Spinner, Col } from 'react-bootstrap';
-import styles from './Login.module.css';
+import styles from './index.module.css';
 import React, { useState } from 'react';
 import userSchemaLogin from "../schemas/userSchemaLogin";
 import { useFormik } from "formik";

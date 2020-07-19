@@ -1,7 +1,7 @@
 import React, {  Fragment } from "react";
 import { Navbar, Nav, Container,Button } from 'react-bootstrap';
 import logo from "./bee.png";
-import styles from './NavigationControls.module.css';
+import styles from './index.module.css';
 import { useAuth } from "../contexts/Auth";
 import userService from "../services/user_service";
 

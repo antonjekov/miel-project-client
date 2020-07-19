@@ -1,6 +1,6 @@
 import React from "react";
 import { Card, Button } from 'react-bootstrap';
-import styles from './ProductCard.module.css';
+import styles from './index.module.css';
 import productService from "../services/product_service";
 import { useAuth } from "../contexts/Auth";
 import userService from "../services/user_service";

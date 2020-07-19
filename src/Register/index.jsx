@@ -1,5 +1,5 @@
 import { Form, Button, Col, Spinner } from 'react-bootstrap';
-import styles from './Register.module.css';
+import styles from './index.module.css';
 import React, { useState } from 'react';
 import userService from "../services/user_service";
 import userSchema from "../schemas/userSchema";

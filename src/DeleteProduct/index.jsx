@@ -1,6 +1,6 @@
 import * as yup from 'yup';
 import { Form, Button, Col, Image} from 'react-bootstrap';
-import styles from './DeleteProduct.module.css';
+import styles from './index.module.css';
 import React, { useState} from 'react';
 
 function DeleteProduct(props) {

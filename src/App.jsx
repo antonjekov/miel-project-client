@@ -1,23 +1,24 @@
 import React, { useState, useEffect } from 'react';
-import './App.css';
-import Footer from './Footer/Footer';
-import FooterPlaceholder from "./FooterPlaceholder";
-import CategoryNavbar from './CategoryNavbar/CategoryNavbar';
-import Login from './Login/Login';
-import Register from './Register/Register';
-import CategoryPage from "./CategoryPage/CategoryPage";
-import AddProductFormic from './AddProductFormic/AddProductFormic';
-import AddSubcategory from "./AddSubcategory/AddSubcategory";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
-import Home from "./Home/Home";
-import SubcategoryProducts from "./SubcategoryProducts/SubcategoryProducts";
-import { AuthContext } from "./contexts/Auth";
-import PrivateRoute from "./PrivateRoute/PrivateRoute"
-import ShoppingCard from "./ShoppingCard/ShoppingCard"
+
+import Footer from './Footer';
+import FooterPlaceholder from "./FooterPlaceholder";
+import CategoryNavbar from './CategoryNavbar';
+import Login from './Login';
+import Register from './Register';
+import CategoryPage from "./CategoryPage";
+import AddProduct from './AddProduct';
+import AddSubcategory from "./AddSubcategory";
+import Home from "./Home";
+import SubcategoryProducts from "./SubcategoryProducts";
+import PrivateRoute from "./PrivateRoute"
+import ShoppingCard from "./ShoppingCard"
 import Contact from "./Contact";
+
+import './App.css';
+import { AuthContext } from "./contexts/Auth";
 import userService from "./services/user_service"
 import categoryService from "./services/category_service"
-
 
 function App() {
 
@@ -45,8 +46,9 @@ function App() {
   }, [])
 
   return (
-    <AuthContext.Provider value={{ userInfo, setUserInfo,categories, setCategories }}>
-      <BrowserRouter>
+
+    <BrowserRouter>
+      <AuthContext.Provider value={{ userInfo, setUserInfo, categories, setCategories }}>
         <CategoryNavbar />
         <Switch>
 
@@ -54,7 +56,7 @@ function App() {
 
           <Route path="/register" component={Register} />
 
-          <Route path="/add-product" component={AddProductFormic} />
+          <Route path="/add-product" component={AddProduct} />
 
           <Route path="/add-subcategory" component={AddSubcategory} />
 
@@ -84,11 +86,13 @@ function App() {
 
           <Route path="/" component={Home} />
 
+          {/* <Route component={NotFoundPage}/> */}
+
         </Switch>
-        <FooterPlaceholder />
-        <Footer />
-      </BrowserRouter>
-    </AuthContext.Provider>
+      </AuthContext.Provider>
+      <FooterPlaceholder />
+      <Footer />
+    </BrowserRouter>
   );
 }
 

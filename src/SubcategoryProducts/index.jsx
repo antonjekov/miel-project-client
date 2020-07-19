@@ -1,6 +1,6 @@
 import React, { useState, useEffect, Fragment } from 'react';
-import styles from './SubcategoryProducts.module.css';
-import ProductCard from "../PoductCard/ProductCard";
+import styles from './index.module.css';
+import ProductCard from "../PoductCard";
 import { CardColumns, Col, Row } from 'react-bootstrap';
 import productService from "../services/product_service";
 import subcategoryService from '../services/subcategory_service';

@@ -1,6 +1,6 @@
 import React, { Fragment, useEffect, useState } from "react";
 import { Container, Col, Row, Button } from 'react-bootstrap';
-import styles from './ShoppingCard.module.css';
+import styles from './index.module.css';
 import { useAuth } from "../contexts/Auth";
 import userService from "../services/user_service"
 import { useHistory } from "react-router-dom";

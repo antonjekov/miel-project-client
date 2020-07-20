@@ -15,6 +15,17 @@ const subcategoryService = {
             body: JSON.stringify(data),
             credentials: 'include'
           });
+    },
+
+    allProductsInSubcat: (data)=>{
+        let headers = new Headers();
+        headers.append("Content-Type", "application/json");
+        return fetch(`http://localhost:3006/subcategory/products`, {
+            method: 'POST',
+            headers:headers,
+            body: JSON.stringify(data),
+            credentials: 'include'
+          });
     }
     
 };

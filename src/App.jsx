@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { BrowserRouter, Switch, Route } from "react-router-dom";
-
 import Footer from './Footer';
 import FooterPlaceholder from "./FooterPlaceholder";
 import CategoryNavbar from './CategoryNavbar';
@@ -14,7 +13,6 @@ import SubcategoryProducts from "./SubcategoryProducts";
 import PrivateRoute from "./PrivateRoute"
 import ShoppingCard from "./ShoppingCard"
 import Contact from "./Contact";
-
 import './App.css';
 import { AuthContext } from "./contexts/Auth";
 import userService from "./services/user_service"
@@ -24,23 +22,32 @@ function App() {
 
   const [userInfo, setUserInfo] = useState()
   const [categories, setCategories] = useState([]);
+
   useEffect(() => {
     async function fetchData() {
-      let result = await categoryService.getAll().then(res => res.json())
-      setCategories(result)
+      try {
+        let result = await categoryService.getAll().then(res => res.json())
+        setCategories(result)
+      } catch (error) {
+        console.log('Failed to fatch data from server')//Server error page
+      }
     }
-
     fetchData()
   }, []);
 
   useEffect(() => {
     async function fetchData() {
-      const res = await userService.getInfoForUser();
-      if (res.status === 204 || !res.ok) {
-        return
+      try {
+        const res = await userService.getInfoForUser();
+        if (res.status === 204 || !res.ok) {
+          return
+        }
+        const resInfo = await res.json();
+        setUserInfo(resInfo);
+
+      } catch (error) {
+        console.log('Failed to fatch data from server')//Server error page
       }
-      const resInfo = await res.json();
-      setUserInfo(resInfo);
     }
     fetchData()
   }, [])
@@ -64,21 +71,7 @@ function App() {
 
           <Route path="/shoppingCard" component={ShoppingCard} />
 
-          <Route path="/honey">
-            <CategoryPage category='honey' />
-          </Route>
-
-          <Route path="/cosmetics">
-            <CategoryPage category='cosmetics' />
-          </Route>
-
-          <Route path="/other bee products">
-            <CategoryPage category='other bee products' />
-          </Route>
-
-          <Route path="/apitherapy">
-            <CategoryPage category='apitherapy' />
-          </Route>
+          <Route path="/category/:id" component={CategoryPage}/>
 
           <Route path="/contacts" component={Contact} />
 

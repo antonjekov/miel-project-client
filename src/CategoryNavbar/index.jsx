@@ -8,7 +8,7 @@ import { useAuth } from "../contexts/Auth";
 function CategoryNavbar() {
     
     const { categories } = useAuth();
-    const allCategories = categories.map(category => <Nav.Link key={category._id} className={styles.navLink} href={`/${category.name.toLowerCase()}`}>{category.name.toUpperCase()}</Nav.Link>);
+    const allCategories = categories.map(category => <Nav.Link key={category._id} className={styles.navLink} href={`/category/${category._id}`}>{category.name.toUpperCase()}</Nav.Link>);
 
     return (
         <Fragment>

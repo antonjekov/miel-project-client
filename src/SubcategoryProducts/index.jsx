@@ -5,53 +5,42 @@ import { CardColumns, Col, Row } from 'react-bootstrap';
 import productService from "../services/product_service";
 import subcategoryService from '../services/subcategory_service';
 import AsideNavbar from '../AsideNavbar';
+import { useAuth } from "../contexts/Auth";
+
 
 
 function SubcategoryProducts(props) {
 
-    const category = props.match.params.category;
-    const subcategory = props.match.params.subcategory;
+    const categoryId = props.match.params.category
+    const subcategoryId = props.match.params.subcategory;
+    const { categories } = useAuth();
+    const category= categories?.find(x => x._id === categoryId);
+    const subcategory =category? category.subcategories?.find(x => x._id === subcategoryId):null
+
     const [products, SetProducts] = useState([]);
-    const [subcategoryInfo, SetSubcategoryInfo] = useState({})
-    const [subcategories, setSubcategories] = useState([]);
-    useEffect(() => {
-        const fetchData = async () => {
-            let result = await subcategoryService.getByCategory(category).then(res => res.json())
-            setSubcategories(result)
-        }
-
-        fetchData()
-    }, [category]);
-
-
     useEffect(() => {
         async function fetchData() {
-            const allProducts = await productService.getAllWithCatSubcat(category, subcategory).then(res => res.json());
-            SetProducts(allProducts)
+            const result = await subcategoryService.allProductsInSubcat({ subcategoryId })
+            const subcategory = await result.json();
+            const productsInfo = subcategory.products
+            SetProducts(productsInfo)
         }
         fetchData()
-    }, [category, subcategory])
+    }, [subcategoryId])
 
-    useEffect(() => {
-        async function fetchData() {
-            const searchedSubcategory = await subcategoryService.getByCategory(category).then(res => res.json()).then(res => res.find(x => x.name === subcategory))
-            SetSubcategoryInfo(searchedSubcategory)
-        }
-        fetchData()
-    }, [category, subcategory])
-
+    
     return (
 
         <Fragment >
             <Row>
-                <Col md={2}><AsideNavbar categoryName={category} subcategories={subcategories} /></Col>
+                <Col md={2}><AsideNavbar categoryId={categoryId} /></Col>
                 <Col md={10}>
                     <Row className={styles.Subcategory}>
                         <Col md={{ offset: 4, span: 2 }}>
-                            <img className={styles.SubcategoryImg} src={subcategoryInfo.imageUrl} alt="Subcategory"></img>
+                            <img className={styles.SubcategoryImg} src={subcategory && subcategory.imageUrl} alt="Subcategory"></img>
                         </Col>
                         <Col md={{ span: 2 }}>
-                            <p >{subcategoryInfo.description}</p>
+                            <p >{subcategory && subcategory.description}</p>
                         </Col>
                     </Row>
                     <Row>
@@ -61,7 +50,6 @@ function SubcategoryProducts(props) {
                     </Row>
                 </Col>
             </Row>
-
         </Fragment>
 
     );

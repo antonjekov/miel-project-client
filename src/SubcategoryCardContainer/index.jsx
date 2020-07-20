@@ -6,9 +6,9 @@ import { useAuth } from "../contexts/Auth";
 
 function SubcategoryCardContainer(props) {
 
-    const categoryName = props.categoryName;
-    const { categories } = useAuth();
-    const category =categories&& categories.find(x=>x.name===categoryName)
+    const { categories } = useAuth()
+    const categoryId = props.categoryId
+    const category= categories?.find(x => x._id === categoryId);
     const subcategories =category&& category.subcategories
 
     const allCards =subcategories&& subcategories.map(subcategory => <SubcategoryCard key={subcategory._id} subcategory={subcategory} category={category} />)

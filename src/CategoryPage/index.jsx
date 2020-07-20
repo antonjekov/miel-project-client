@@ -2,14 +2,13 @@ import React from "react";
 import { Row, Col } from 'react-bootstrap';
 import AsideNavbar from '../AsideNavbar';
 import SubcategoryCardContainer from '../SubcategoryCardContainer';
+//import { useAuth } from "../contexts/Auth";
 
 function CategoryPage(props) {
-
-  const categoryName = props.category
-
+  const categoryId = props.match.params.id;
   return <Row  >
-    <Col md={2}><AsideNavbar categoryName={categoryName} /></Col>
-    <Col md={10}><SubcategoryCardContainer categoryName={categoryName} /> </Col>
+    <Col md={2}><AsideNavbar categoryId={categoryId} /></Col>
+    <Col md={10}><SubcategoryCardContainer categoryId={categoryId} /> </Col>
   </Row>
 }
 

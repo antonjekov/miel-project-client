@@ -13,6 +13,7 @@ import SubcategoryProducts from "./SubcategoryProducts";
 import PrivateRoute from "./PrivateRoute"
 import ShoppingCard from "./ShoppingCard"
 import Contact from "./Contact";
+import NotFoundPage from "./PageNotFound";
 import './App.css';
 import { AuthContext } from "./contexts/Auth";
 import userService from "./services/user_service"
@@ -24,18 +25,31 @@ function App() {
   const [categories, setCategories] = useState([]);
 
   useEffect(() => {
+
+    //WITH THIS WE CAN MAKE OPTIMIZATION FOR NOT TO FECH DATA FROM SERVER ALL THE TIME
+    // if (localStorage.getItem('categories')) {
+    //   setCategories(JSON.parse(localStorage.getItem('categories')))
+    //   return
+    // }
     async function fetchData() {
       try {
         let result = await categoryService.getAll().then(res => res.json())
         setCategories(result)
+        //localStorage.setItem('categories', JSON.stringify(result))
       } catch (error) {
         console.log('Failed to fatch data from server')//Server error page
       }
     }
+
     fetchData()
   }, []);
 
   useEffect(() => {
+    //WITH THIS WE CAN MAKE OPTIMIZATION FOR NOT TO FECH DATA FROM SERVER ALL THE TIME
+    // if (localStorage.getItem('user')) {
+    //   setUserInfo(JSON.parse(localStorage.getItem('user')))
+    //   return
+    // }
     async function fetchData() {
       try {
         const res = await userService.getInfoForUser();
@@ -44,6 +58,7 @@ function App() {
         }
         const resInfo = await res.json();
         setUserInfo(resInfo);
+        //localStorage.setItem('user', JSON.stringify(resInfo))
 
       } catch (error) {
         console.log('Failed to fatch data from server')//Server error page
@@ -63,23 +78,21 @@ function App() {
 
           <Route path="/register" component={Register} />
 
-          <Route path="/add-product" component={AddProduct} />
+          <PrivateRoute path="/add-product" autorized="admin" component={AddProduct} />
 
-          <Route path="/add-subcategory" component={AddSubcategory} />
+          <PrivateRoute path="/add-subcategory" autorized="admin" component={AddSubcategory} />
 
-          {/* <PrivateRoute path="/add-subcategory" component={AddSubcategory} /> */}
+          <PrivateRoute path="/shoppingCard" autorized="client" component={ShoppingCard} />
 
-          <Route path="/shoppingCard" component={ShoppingCard} />
-
-          <Route path="/category/:id" component={CategoryPage}/>
+          <Route path="/category/:id" component={CategoryPage} />
 
           <Route path="/contacts" component={Contact} />
 
           <Route path="/products/:category/:subcategory" component={SubcategoryProducts} />
 
-          <Route path="/" component={Home} />
+          <Route path="/" exact component={Home} />
 
-          {/* <Route component={NotFoundPage}/> */}
+          <Route component={NotFoundPage}/>
 
         </Switch>
       </AuthContext.Provider>

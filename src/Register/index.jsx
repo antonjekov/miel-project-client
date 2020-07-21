@@ -5,8 +5,11 @@ import userService from "../services/user_service";
 import userSchema from "../schemas/userSchema";
 import { useFormik } from "formik";
 import { Redirect } from "react-router-dom";
+import { useAuth } from "../contexts/Auth";
+
 
 function Register(props) {
+    const { setUserInfo } = useAuth();
     const [isLoading, setIsLoading] = useState(false);
     const [loginSuccess, setLoginSuccess] = useState(false);
     
@@ -29,6 +32,8 @@ function Register(props) {
                         actions.setErrors(errorsObject)
                         return
                     }
+                    const userInfo =await res.json()
+                    setUserInfo(userInfo)
                     setIsLoading(false);
                     setLoginSuccess(true);
                 })
@@ -39,7 +44,7 @@ function Register(props) {
         
     });
 
-    return (loginSuccess ? <Redirect to='/login' /> :
+    return (loginSuccess ? <Redirect to='/' /> :
     <Col md={{ offset: 2, span: 8 }}>
         <div className={styles.Register}>
             <Form onSubmit={handleSubmit}>

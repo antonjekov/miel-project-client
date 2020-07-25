@@ -1,0 +1,93 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`matches snapshot 1`] = `
+Array [
+  <nav
+    className="navbar navbar-expand-lg navbar-light bg-light"
+  >
+    <div
+      className="brand container"
+    >
+      <a
+        className="navbar-brand"
+        href="/"
+      >
+        <img
+          alt="Bee logo"
+          className="d-inline-block align-top"
+          height="50"
+          src="bee.png"
+          width="50"
+        />
+      </a>
+    </div>
+    <div
+      className="justify-content-center container"
+    >
+      <a
+        className="navLink nav-link"
+        href="/login"
+        onClick={[Function]}
+        onKeyDown={[Function]}
+      >
+        Login
+      </a>
+      <a
+        className="navLink nav-link"
+        href="/register"
+        onClick={[Function]}
+        onKeyDown={[Function]}
+      >
+        Register
+      </a>
+      <a
+        className="navLink nav-link"
+        href="/contacts"
+        onClick={[Function]}
+        onKeyDown={[Function]}
+      >
+        Contacts
+      </a>
+      
+    </div>
+    
+    
+  </nav>,
+  <nav
+    className="justify-content-center navbar navbar-expand-lg navbar-light bg-light sticky-top"
+  >
+    <a
+      className="navLink nav-link"
+      href="/category/5edbd65159792f2e580f5491"
+      onClick={[Function]}
+      onKeyDown={[Function]}
+    >
+      HONEY
+    </a>
+    <a
+      className="navLink nav-link"
+      href="/category/5edc2404d1fa4095ec7e954b"
+      onClick={[Function]}
+      onKeyDown={[Function]}
+    >
+      COSMETICS
+    </a>
+    <a
+      className="navLink nav-link"
+      href="/category/5edc2450d1fa4095ec7e954c"
+      onClick={[Function]}
+      onKeyDown={[Function]}
+    >
+      OTHER BEE PRODUCTS
+    </a>
+    <a
+      className="navLink nav-link"
+      href="/category/5edc246bd1fa4095ec7e954d"
+      onClick={[Function]}
+      onKeyDown={[Function]}
+    >
+      APITHERAPY
+    </a>
+  </nav>,
+]
+`;

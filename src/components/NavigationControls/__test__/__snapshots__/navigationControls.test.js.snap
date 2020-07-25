@@ -1,0 +1,195 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`matches snapshot admin 1`] = `
+<nav
+  className="navbar navbar-expand-lg navbar-light bg-light"
+>
+  <div
+    className="brand container"
+  >
+    <a
+      className="navbar-brand"
+      href="/"
+    >
+      <img
+        alt="Bee logo"
+        className="d-inline-block align-top"
+        height="50"
+        src="bee.png"
+        width="50"
+      />
+    </a>
+  </div>
+  <div
+    className="justify-content-center container"
+  >
+    <a
+      className="navLink nav-link"
+      href="#"
+      onClick={[Function]}
+      onKeyDown={[Function]}
+      role="button"
+    >
+      Logout
+    </a>
+    <a
+      className="navLink nav-link"
+      href="/contacts"
+      onClick={[Function]}
+      onKeyDown={[Function]}
+    >
+      Contacts
+    </a>
+    <a
+      className="navLink nav-link"
+      href="/add-product"
+      onClick={[Function]}
+      onKeyDown={[Function]}
+    >
+      Add Product
+    </a>
+    <a
+      className="navLink nav-link"
+      href="/add-subcategory"
+      onClick={[Function]}
+      onKeyDown={[Function]}
+    >
+      Add Subcategory
+    </a>
+  </div>
+  <div
+    className="user container"
+  >
+    <span
+      className="navbar-text"
+    >
+      Welcome 
+      admin
+    </span>
+  </div>
+  
+</nav>
+`;
+
+exports[`matches snapshot client 1`] = `
+<nav
+  className="navbar navbar-expand-lg navbar-light bg-light"
+>
+  <div
+    className="brand container"
+  >
+    <a
+      className="navbar-brand"
+      href="/"
+    >
+      <img
+        alt="Bee logo"
+        className="d-inline-block align-top"
+        height="50"
+        src="bee.png"
+        width="50"
+      />
+    </a>
+  </div>
+  <div
+    className="justify-content-center container"
+  >
+    <a
+      className="navLink nav-link"
+      href="#"
+      onClick={[Function]}
+      onKeyDown={[Function]}
+      role="button"
+    >
+      Logout
+    </a>
+    <a
+      className="navLink nav-link"
+      href="/contacts"
+      onClick={[Function]}
+      onKeyDown={[Function]}
+    >
+      Contacts
+    </a>
+    
+  </div>
+  <div
+    className="user container"
+  >
+    <span
+      className="navbar-text"
+    >
+      Welcome 
+      anton
+    </span>
+  </div>
+  <a
+    className="btn btn-warning"
+    href="/shoppingCard"
+    onClick={[Function]}
+    onKeyDown={[Function]}
+  >
+    <b>
+      Shopping cart
+    </b>
+     products 
+    <b>
+      2
+    </b>
+  </a>
+</nav>
+`;
+
+exports[`matches snapshot without user 1`] = `
+<nav
+  className="navbar navbar-expand-lg navbar-light bg-light"
+>
+  <div
+    className="brand container"
+  >
+    <a
+      className="navbar-brand"
+      href="/"
+    >
+      <img
+        alt="Bee logo"
+        className="d-inline-block align-top"
+        height="50"
+        src="bee.png"
+        width="50"
+      />
+    </a>
+  </div>
+  <div
+    className="justify-content-center container"
+  >
+    <a
+      className="navLink nav-link"
+      href="/login"
+      onClick={[Function]}
+      onKeyDown={[Function]}
+    >
+      Login
+    </a>
+    <a
+      className="navLink nav-link"
+      href="/register"
+      onClick={[Function]}
+      onKeyDown={[Function]}
+    >
+      Register
+    </a>
+    <a
+      className="navLink nav-link"
+      href="/contacts"
+      onClick={[Function]}
+      onKeyDown={[Function]}
+    >
+      Contacts
+    </a>
+    
+  </div>
+  
+  
+</nav>
+`;

@@ -1,8 +1,10 @@
+const REACT_APP_SERVER_API_URL = process.env.REACT_APP_SERVER_API_URL;
+
 const productService = {
     add:  (data) =>{
         let headers = new Headers();
         headers.append("Content-Type", "application/json");
-        return fetch(`http://localhost:3006/add-product`, {
+        return fetch(`${REACT_APP_SERVER_API_URL}add-product`, {
             method: 'POST',
             headers:headers,
             body: JSON.stringify(data),
@@ -11,14 +13,14 @@ const productService = {
     },
     
     getAll: ()=>{
-        return fetch(`http://localhost:3006/products`, {
+        return fetch(`${REACT_APP_SERVER_API_URL}products`, {
             method: 'GET',
             credentials: 'include'
           });
     },
 
     delete: (productId)=>{
-        return fetch(`http://localhost:3006/products-delete/${productId}`, {
+        return fetch(`${REACT_APP_SERVER_API_URL}${productId}`, {
             method: 'GET',
             credentials: 'include'
           });

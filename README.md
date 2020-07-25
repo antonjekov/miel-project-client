@@ -1,4 +1,28 @@
+MIEL PROJECT
+
+Miel project is e-commerse web application. The application have 3 access modes: not sign in user, sign in user and administrator.Sign in users have all not sign in user functionality + view of shopping card page.
+Log in as administrator (user:admin@yahoo.com, password: 123456) have all not sign in user functionality + Add subcategories, Add products and delete products.
+You can view project code here: https://github.com/antonjekov/miel-project-client 
+
+## Used technologies and libraries:
+
+React 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+react-bootstrap - ready for use stiled components
+formic and yup - yup for make schema and formic for validate data in form input fields
+claudinary - used for save all images in application
+dropzone - we use this library in Add product and Add Subcategory page 
+Google Maps Api - used in Contact page for represent interactive map with marked our phisical sell points.
+@testing-library/react - used in developer mode for test components
+react-test-renderer - used in developer mode for test components
+
+## Getting Started
+
+1. Clone the code from provided github repository https://github.com/antonjekov/miel-project-client
+2. Save in the root directory file `.env.local` (not included in repository)
+3. Install all dependencies with command `npm install`
+4. Server api runs on https://miel-project-server.herokuapp.com/ . If you want to use local server first change SERVER_URL in file `.env.local` and then install and start server the api is provided here: https://github.com/antonjekov/miel-project-server . More information how to start server you can find in README.md of this repository. 
+5. Start current application with command `npm start`. The application will run in http://localhost:3000
 
 ## Available Scripts
 

@@ -1,8 +1,10 @@
+const REACT_APP_SERVER_API_URL = process.env.REACT_APP_SERVER_API_URL;
+
 const userService = {
     login:  (data) =>{
         let headers = new Headers();
         headers.append("Content-Type", "application/json");
-        return fetch(`http://localhost:3006/login`, {
+        return fetch(`${REACT_APP_SERVER_API_URL}login`, {
             method: 'POST',
             headers:headers,
             body: JSON.stringify(data),
@@ -13,7 +15,7 @@ const userService = {
     register: (data)=>{
         let headers = new Headers();
         headers.append("Content-Type", "application/json");
-        return fetch(`http://localhost:3006/register`, {
+        return fetch(`${REACT_APP_SERVER_API_URL}register`, {
             method: 'POST',
             headers:headers,
             body: JSON.stringify(data),
@@ -22,7 +24,7 @@ const userService = {
     },
 
     logout: ()=>{
-        return fetch(`http://localhost:3006/logout`, {
+        return fetch(`${REACT_APP_SERVER_API_URL}logout`, {
             method: 'POST',
             credentials: 'include'            
           });
@@ -31,68 +33,13 @@ const userService = {
     getInfoForUser: ()=>{
         let headers = new Headers();
         headers.append("Content-Type", "application/json");
-        return fetch(`http://localhost:3006/user/getInfoForUser`, {
+        return fetch(`${REACT_APP_SERVER_API_URL}user/getInfoForUser`, {
             method: 'POST',
             headers:headers,
             credentials: 'include'
           }); 
     },
 
-    shoppingCartGet: ()=>{
-        let headers = new Headers();
-        headers.append("Content-Type", "application/json");
-        return fetch(`http://localhost:3006/shoppingCard/get`, {
-            method: 'POST',
-            headers:headers,
-            credentials: 'include'
-          });        
-    },
-
-    shoppingCardAdd: (data)=>{
-        let headers = new Headers();
-        headers.append("Content-Type", "application/json");
-        return fetch(`http://localhost:3006/shoppingCard/add`, {
-            method: 'POST',
-            headers:headers,
-            body: JSON.stringify(data),
-            credentials: 'include'
-          });        
-    },
-
-    shoppingCartCheckout: (data)=>{
-        let headers = new Headers();
-        headers.append("Content-Type", "application/json");
-        return fetch(`http://localhost:3006/shoppingCart/checkout`, {
-            method: 'POST',
-            headers:headers,
-            body: JSON.stringify(data),
-            credentials: 'include'
-          });        
-    },
-
-    deleteAllFromShoppingCart: (data)=>{
-        let headers = new Headers();
-        headers.append("Content-Type", "application/json");
-        return fetch(`http://localhost:3006/shoppingCart/deleteAll`, {
-            method: 'POST',
-            headers:headers,
-            body: JSON.stringify(data),
-            credentials: 'include'
-          });        
-    },
-
-    deleteOneFromShoppingCard: (data)=>{
-        let headers = new Headers();
-        headers.append("Content-Type", "application/json");
-        return fetch(`http://localhost:3006/shoppingCart/deleteOne`, {
-            method: 'POST',
-            headers:headers,
-            body: JSON.stringify(data),
-            credentials: 'include'
-          });    
-    }
-
-    
 };
 
 export default userService

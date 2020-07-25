@@ -1,6 +1,8 @@
+const REACT_APP_SERVER_API_URL = process.env.REACT_APP_SERVER_API_URL;
+
 const subcategoryService = {
     getByCategory:  (category) =>{
-        return fetch(`http://localhost:3006/subcategories/${category}`, {
+        return fetch(`${REACT_APP_SERVER_API_URL}subcategories/${category}`, {
             method: 'GET',
             credentials: 'include'
           });
@@ -9,7 +11,7 @@ const subcategoryService = {
     add: (data)=>{
         let headers = new Headers();
         headers.append("Content-Type", "application/json");
-        return fetch(`http://localhost:3006/add-subcategory`, {
+        return fetch(`${REACT_APP_SERVER_API_URL}add-subcategory`, {
             method: 'POST',
             headers:headers,
             body: JSON.stringify(data),
@@ -20,7 +22,7 @@ const subcategoryService = {
     allProductsInSubcat: (data)=>{
         let headers = new Headers();
         headers.append("Content-Type", "application/json");
-        return fetch(`http://localhost:3006/subcategory/products`, {
+        return fetch(`${REACT_APP_SERVER_API_URL}subcategory/products`, {
             method: 'POST',
             headers:headers,
             body: JSON.stringify(data),

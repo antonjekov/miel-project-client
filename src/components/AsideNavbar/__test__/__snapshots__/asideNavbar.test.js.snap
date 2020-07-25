@@ -1,0 +1,21 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`matches snapshot 1`] = `
+<div
+  className="flex-column nav"
+  onKeyDown={[Function]}
+>
+  <a
+    aria-disabled={true}
+    className="nav-link disabled"
+    data-rb-event-key={null}
+    href="#"
+    id="navTitle"
+    onClick={[Function]}
+    onKeyDown={[Function]}
+    role="button"
+    tabIndex={-1}
+  />
+  <br />
+</div>
+`;

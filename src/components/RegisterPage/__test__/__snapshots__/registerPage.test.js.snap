@@ -1,0 +1,166 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`matches snapshot 1`] = `
+<div
+  className="col-md-8 offset-md-2"
+>
+  <div
+    className="Register"
+  >
+    <form
+      className=""
+      onSubmit={[Function]}
+    >
+      <div>
+        <h1>
+          Register
+        </h1>
+      </div>
+      <br />
+      <div
+        className="form-row"
+      >
+        <div
+          className="col"
+        >
+          <div
+            className="form-group"
+          >
+            <label
+              className="form-label"
+            >
+              Name
+            </label>
+            <input
+              className="form-control form-control"
+              name="name"
+              onChange={[Function]}
+              placeholder="Enter your name"
+              type="text"
+              value=""
+            />
+            <div
+              className="invalid-feedback"
+            />
+            <div
+              className="valid-feedback"
+            >
+              Look's good
+            </div>
+          </div>
+        </div>
+        <div
+          className="col"
+        >
+          <div
+            className="form-group"
+          >
+            <label
+              className="form-label"
+            >
+              Email address
+            </label>
+            <input
+              className="form-control form-control"
+              name="username"
+              onChange={[Function]}
+              placeholder="Enter email"
+              type="email"
+              value=""
+            />
+            <div
+              className="invalid-feedback"
+            />
+            <div
+              className="valid-feedback"
+            >
+              Look's good
+            </div>
+          </div>
+        </div>
+      </div>
+      <div
+        className="form-row"
+      >
+        <div
+          className="col"
+        >
+          <div
+            className="form-group"
+          >
+            <label
+              className="form-label"
+            >
+              Password
+            </label>
+            <input
+              className="form-control form-control"
+              name="password"
+              onChange={[Function]}
+              placeholder="Password"
+              type="password"
+              value=""
+            />
+            <div
+              className="invalid-feedback"
+            />
+            <div
+              className="valid-feedback"
+            >
+              Look's good
+            </div>
+          </div>
+        </div>
+        <div
+          className="col"
+        >
+          <div
+            className="form-group"
+          >
+            <label
+              className="form-label"
+            >
+              Repeat Password
+            </label>
+            <input
+              className="form-control form-control"
+              name="repassword"
+              onChange={[Function]}
+              placeholder="Repeat Password"
+              type="password"
+              value=""
+            />
+            <div
+              className="invalid-feedback"
+            />
+            <div
+              className="valid-feedback"
+            >
+              Look's good
+            </div>
+          </div>
+        </div>
+      </div>
+      <button
+        className="btn btn-warning"
+        disabled={false}
+        type="submit"
+      >
+        Register
+      </button>
+      <small
+        className="form-text"
+      >
+        Already have an account? 
+        <a
+          href="/login"
+        >
+          <b>
+            Login
+          </b>
+        </a>
+      </small>
+    </form>
+  </div>
+</div>
+`;

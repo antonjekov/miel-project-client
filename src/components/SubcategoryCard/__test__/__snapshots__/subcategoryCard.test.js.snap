@@ -1,0 +1,30 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`matches snapshot 1`] = `
+<div
+  className="card border-warning"
+  style={
+    Object {
+      "height": "15rem",
+      "width": "15rem",
+    }
+  }
+>
+  <img
+    className="card-img-top"
+    data-testid="subcategoryImage"
+    src="https://res.cloudinary.com/mielproject/image/upload/v1594124893/hbezpw1k9wzxgth1yovb.jpg"
+  />
+  <div
+    className="card-body"
+  >
+    <a
+      className="CardLink card-link"
+      data-testid="productsHref"
+      href="/products/5edbd65159792f2e580f5491/5f046a611f1f5d130809bdd1"
+    >
+      acacia
+    </a>
+  </div>
+</div>
+`;

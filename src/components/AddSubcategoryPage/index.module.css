@@ -1,0 +1,10 @@
+.drop-zone{
+    border: 1px dashed black;
+    height: 5em;
+    text-align: center;
+}
+
+.AddSubcategory {
+    margin-top: 1em;
+    margin-bottom: 2em;
+}

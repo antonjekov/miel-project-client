@@ -1,0 +1,137 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`matches snapshot admin 1`] = `
+<div
+  className="card border-warning"
+  style={
+    Object {
+      "height": "25rem",
+      "width": "18rem",
+    }
+  }
+>
+  <img
+    alt="image of product"
+    className="card-img-top CardImg"
+    src="https://res.cloudinary.com/mielproject/image/upload/v1594310410/pfgki1klwc77ks9wfb5e.jpg"
+  />
+  <div
+    className="card-body"
+  >
+    <div
+      className="card-title h5"
+    >
+      shampoo
+    </div>
+    <p
+      className="card-text"
+    />
+    <p
+      className="card-text"
+    >
+      Available
+    </p>
+    <p
+      className="Price card-text"
+    >
+      5.00 €
+    </p>
+    <button
+      className="btn btn-danger"
+      disabled={false}
+      onClick={[Function]}
+      type="button"
+    >
+      Delete product
+    </button>
+    
+  </div>
+</div>
+`;
+
+exports[`matches snapshot client product available 1`] = `
+<div
+  className="card border-warning"
+  style={
+    Object {
+      "height": "25rem",
+      "width": "18rem",
+    }
+  }
+>
+  <img
+    alt="image of product"
+    className="card-img-top CardImg"
+    src="https://res.cloudinary.com/mielproject/image/upload/v1594310410/pfgki1klwc77ks9wfb5e.jpg"
+  />
+  <div
+    className="card-body"
+  >
+    <div
+      className="card-title h5"
+    >
+      shampoo
+    </div>
+    <p
+      className="card-text"
+    />
+    <p
+      className="card-text"
+    >
+      Available
+    </p>
+    <p
+      className="Price card-text"
+    >
+      5.00 €
+    </p>
+    
+    <button
+      className="btn btn-warning"
+      disabled={false}
+      onClick={[Function]}
+      type="button"
+    >
+      Add to Shopping Card
+    </button>
+  </div>
+</div>
+`;
+
+exports[`matches snapshot client product notAvailable 1`] = `
+<div
+  className="card border-warning"
+  style={
+    Object {
+      "height": "25rem",
+      "width": "18rem",
+    }
+  }
+>
+  <img
+    alt="image of product"
+    className="card-img-top CardImg"
+    src="https://res.cloudinary.com/mielproject/image/upload/v1594311284/kudbcmswwf7t03a7lht0.jpg"
+  />
+  <div
+    className="card-body"
+  >
+    <div
+      className="card-title h5"
+    >
+      shampoo not available
+    </div>
+    <p
+      className="card-text"
+    />
+    <p
+      className="card-text"
+    >
+      Not available
+    </p>
+    
+    
+    
+  </div>
+</div>
+`;

@@ -1,12 +1,14 @@
 import React from "react";
 import MapContainer from "../MapContainer";
+import SendMessage from "../SendMessage";
 import { Row, Col } from 'react-bootstrap';
 
 
 function Contact(props) {
     return (
+        <Col>
         <Row>
-            <Col md={{ offset: 2, span: 4 }}>
+            <Col md={{ offset: 1, span: 2 }}>
                 <h3>Contact Us</h3>
                 <br />
                 <h4>Stara Zagora</h4>
@@ -19,9 +21,14 @@ function Contact(props) {
             </Col>
         <Col md={4}>
             <MapContainer></MapContainer>
-        </Col>      
+        </Col> 
+        <Col md={4}>
+            <SendMessage></SendMessage>
+        </Col>     
            
-        </Row >)
+        </Row >
+        </Col>)
+        
 }
 
 export default Contact

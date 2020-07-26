@@ -1,20 +1,25 @@
-MIEL PROJECT
+## MIEL PROJECT
 
-Miel project is e-commerse web application. The application have 3 access modes: not sign in user, sign in user and administrator.Sign in users have all not sign in user functionality + view of shopping card page.
-Log in as administrator (user:admin@yahoo.com, password: 123456) have all not sign in user functionality + Add subcategories, Add products and delete products.
+Miel project is e-commerse web application.<br />
+The application have 3 access modes:<br />
+- not sign in user <br />
+- sign in user - have all not sign in user functionality + view of shopping card page.<br />
+- administrator - By default when you register new user it is registered with client rights. For to login with administrator rights you can use <b>user:admin@yahoo.com, password: 123456</b>. Administrator have all not sign in user functionality + Add subcategories, Add products and delete products.<br />
 You can view project code here: https://github.com/antonjekov/miel-project-client 
 
 ## Used technologies and libraries:
-
-React 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
-react-bootstrap - ready for use stiled components
-formic and yup - yup for make schema and formic for validate data in form input fields
-claudinary - used for save all images in application
-dropzone - we use this library in Add product and Add Subcategory page 
-Google Maps Api - used in Contact page for represent interactive map with marked our phisical sell points.
-@testing-library/react - used in developer mode for test components
-react-test-renderer - used in developer mode for test components
+ 
+# Client-side:
+React<br /> 
+This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).<br />
+react-bootstrap - ready for use stiled components<br />
+formic and yup - yup for make schema and formic for validate data in form input fields<br />
+claudinary - used for save all images in application<br />
+dropzone - we use this library in Add product and Add Subcategory page <br />
+Google Maps Api - used in Contact page for represent interactive map with marked our phisical sell points.<br />
+@testing-library/react - used in developer mode for test components<br />
+react-test-renderer - used in developer mode for test components<br />
+nodemailer - used in server part for send messages from Contact page
 
 ## Getting Started
 

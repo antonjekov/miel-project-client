@@ -50,6 +50,7 @@ function AddProductFormic(props) {
                 actions.resetForm();
                 SetUploadedFileCloudinaryUrl('')
                 setShow(true)
+                setTimeout(()=>{setShow(false)},3000)
             })
                 .catch(err => {
                     // What must happen if have server error
@@ -77,14 +78,12 @@ function AddProductFormic(props) {
     let result =categories&& categories.find(x => x.name === values.category)
     let subcategoryOptions = result&&result.subcategories.map(x => <option key={x._id}>{x.name}</option>)
        
-    
+    const buttonDisabled = (!!Object.keys(errors).length)||(values.name==='')
+
     return (
         <Col md={{ offset: 3, span: 6 }}>
             <div className={styles.AddProduct}>
                 <h1>Add Product</h1>
-                <Alert variant="success" show={show} onClose={() => setShow(false)} dismissible='true'>
-                    <Alert.Heading>Product successfuly added !</Alert.Heading>
-                </Alert>
                 <Form onSubmit={handleSubmit}>
                     <Form.Row>
                         <Col>
@@ -169,12 +168,15 @@ function AddProductFormic(props) {
 
                     <Form.Row>
                         <Col>
-                            <Button variant="warning" type="submit" disabled={!!Object.keys(errors).length}>
+                            <Button variant="warning" type="submit" disabled={buttonDisabled}>
                                 Add Product
                         </Button>
                         </Col>
                     </Form.Row>
                 </Form>
+                <Alert variant="success" show={show} onClose={() => setShow(false)} dismissible='true'>
+                    <p>Product successfuly added !</p>
+                </Alert>                
             </div>
         </Col>
 

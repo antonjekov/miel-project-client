@@ -1,4 +1,4 @@
-import React, { useState, useEffect, Fragment } from 'react';
+import React, { useState, useEffect } from 'react';
 import styles from './index.module.css';
 import ProductCard from "../PoductCard" ;
 import { CardColumns, Col, Row } from 'react-bootstrap';
@@ -30,7 +30,7 @@ function SubcategoryProducts(props) {
     
     return (
 
-        <Fragment >
+        <Col >
             <Row>
                 <Col md={2}><AsideNavbar categoryId={categoryId} /></Col>
                 <Col md={10}>
@@ -49,7 +49,7 @@ function SubcategoryProducts(props) {
                     </Row>
                 </Col>
             </Row>
-        </Fragment>
+        </Col>
 
     );
 }

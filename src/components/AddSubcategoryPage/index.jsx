@@ -51,6 +51,7 @@ function AddSubcategory(props) {
                     actions.resetForm();
                     SetUploadedFileCloudinaryUrl('')
                     setShow(true)
+                    setTimeout(()=>{setShow(false)},3000)
                 })
                 .catch(err => {
                     // What must happen if have server error
@@ -76,6 +77,7 @@ function AddSubcategory(props) {
     }
 
     let categoryOptions = categories.map(category => <option key={category._id}>{category.name}</option>)
+    const buttonDisabled = (!!Object.keys(errors).length)||(values.category==='')
 
     return (
         <Col md={{ offset: 3, span: 6 }}>
@@ -83,9 +85,6 @@ function AddSubcategory(props) {
                 <h1>
                     Add Subcategory
                 </h1>
-                <Alert variant="success" show={show} onClose={() => setShow(false)} dismissible='true'>
-                    <Alert.Heading>Subcategory successfuly added !</Alert.Heading>
-                </Alert>
                 <Form onSubmit={handleSubmit}>
                     <Form.Row>
                         <Col>
@@ -148,15 +147,18 @@ function AddSubcategory(props) {
                         </Col>
                     </Form.Row>
 
-
                     <Form.Row>
                         <Col>
-                            <Button variant="warning" type="submit" disabled={!!Object.keys(errors).length}>
+                            <Button variant="warning" type="submit" disabled={buttonDisabled}>
                                 Add Subcategory
                         </Button>
                         </Col>
                     </Form.Row>
                 </Form>
+
+                <Alert variant="success" show={show} onClose={() => setShow(false)} dismissible='true'>
+                    <Alert.Heading>Subcategory successfuly added !</Alert.Heading>
+                </Alert>                
             </div>
         </Col>
     );

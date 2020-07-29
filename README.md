@@ -1,4 +1,4 @@
-## MIEL PROJECT
+# MIEL PROJECT
 
 Miel project is e-commerse web application.<br />
 The application have 3 access modes:<br />
@@ -9,7 +9,7 @@ You can view project code here: https://github.com/antonjekov/miel-project-clien
 
 ## Used technologies and libraries:
  
-# Client-side:
+### Client-side:
 React<br /> 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).<br />
 react-bootstrap - ready for use stiled components<br />

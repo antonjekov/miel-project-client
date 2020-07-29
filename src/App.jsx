@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { BrowserRouter, Switch, Route } from "react-router-dom";
+import { Spinner } from 'react-bootstrap';
 
 import Footer from './components/Footer';
 import FooterPlaceholder from "./components/FooterPlaceholder";
@@ -25,17 +26,20 @@ function App() {
 
     const [userInfo, setUserInfo] = useState()
     const [categories, setCategories] = useState([]);
+    const [loadingCategories, setLoadingCategories] = useState(true)
+    const [loadingUser, setLoadingUser] = useState(true)
 
     useEffect(() => {
         async function fetchData() {
             try {
                 let result = await categoryService.getAll().then(res => res.json())
-                setCategories(result)                
+                setCategories(result)
+                setLoadingCategories(false)              
             } catch (error) {
+                setLoadingCategories(false) 
                 console.log('Failed to fatch data from server')//Server error page
             }
         }
-
         fetchData()
     }, []);
 
@@ -44,20 +48,28 @@ function App() {
             try {
                 const res = await userService.getInfoForUser();
                 if (res.status === 204 || !res.ok) {
+                    setLoadingUser(false)
                     return
                 }
                 const resInfo = await res.json();
                 setUserInfo(resInfo);
+                setLoadingUser(false)
             } catch (error) {
+                setLoadingUser(false)
                 console.log('Failed to fatch data from server')//Server error page
             }
         }
         fetchData()
     }, [])
 
-    return (
+    if (loadingCategories||loadingUser) {
+        return <Spinner animation="border" variant="warning" />
+    }
+
+    return  (        
         <BrowserRouter>
             <AuthContext.Provider value={{ userInfo, setUserInfo, categories, setCategories }}>
+                
                 <CategoryNavbar />
                 <Switch>
 

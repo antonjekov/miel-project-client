@@ -17,3 +17,13 @@ test("inputs update on change", () =>{
     fireEvent.change(passwordInput,{target:{value: '123456'}})
     expect(passwordInput.value).toBe('123456')
   })
+
+  it('matches snapshot', ()=>{
+    const tree = renderer.create(
+        <AuthContext.Provider value={{setUserInfo}}>
+            <Login/>
+        </AuthContext.Provider>
+   ).toJSON();
+  
+    expect(tree).toMatchSnapshot();
+  })

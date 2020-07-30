@@ -15,7 +15,7 @@ const subcategorySchema = yup.object().shape({
         .string()
         .max(200, "Description too long.")
         .min(3, "Description too short.")
-        .required(true, "Description is Required"),
+        .required("Description is Required"),
 });
 
 export default subcategorySchema

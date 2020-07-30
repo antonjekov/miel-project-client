@@ -11,6 +11,7 @@ const claudinaryService = {
                 body: formData
             });
             const data = await response.json();
+            console.log(data)
             if (data && data.secure_url !== '') {
                 return {
                     url: data.secure_url,
@@ -23,7 +24,9 @@ const claudinaryService = {
                 error: 'File to upload image. Please try again.'
             }
         }
-    }
+    },
+
+    
 };
 
 export default claudinaryService

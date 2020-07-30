@@ -2,43 +2,172 @@
 
 exports[`matches snapshot 1`] = `
 <div
-  className="row"
+  className="col"
 >
   <div
-    className="col-md-4 offset-md-2"
+    className="row"
   >
-    <h3>
-      Contact Us
-    </h3>
-    <br />
-    <h4>
-      Stara Zagora
-    </h4>
-    <br />
-    <h5>
-      Miel Store 1
-    </h5>
-    <p>
-      Car Simeon Veliki Str. 142
+    <div
+      className="col-md-2 offset-md-1"
+    >
+      <h3>
+        Contact Us
+      </h3>
       <br />
-      tel: +359 111 111
-    </p>
-    <br />
-    <h5>
-      Miel Store 2
-    </h5>
-    <p>
-      General Gurko Str 47
+      <h4>
+        Stara Zagora
+      </h4>
       <br />
-      tel: +359 222 222
-    </p>
-  </div>
-  <div
-    className="col-md-4"
-  >
-    <div />
-    <div>
-      Loading...
+      <h5>
+        Miel Store 1
+      </h5>
+      <p>
+        Car Simeon Veliki Str. 142
+        <br />
+        tel: +359 111 111
+      </p>
+      <br />
+      <h5>
+        Miel Store 2
+      </h5>
+      <p>
+        General Gurko Str 47
+        <br />
+        tel: +359 222 222
+      </p>
+    </div>
+    <div
+      className="col-md-4"
+    >
+      <div />
+      <div>
+        Loading...
+      </div>
+    </div>
+    <div
+      className="col-md-4"
+    >
+      <form
+        className=""
+        onSubmit={[Function]}
+      >
+        <div>
+          <h3>
+            Send a message
+          </h3>
+        </div>
+        <br />
+        <div
+          className="form-row"
+        >
+          <div
+            className="col"
+          >
+            <div
+              className="form-group"
+            >
+              <label
+                className="form-label"
+              >
+                Name
+              </label>
+              <input
+                className="form-control form-control"
+                name="name"
+                onChange={[Function]}
+                placeholder="Enter your name"
+                type="text"
+                value=""
+              />
+              <div
+                className="invalid-feedback"
+              />
+              <div
+                className="valid-feedback"
+              >
+                Look's good
+              </div>
+            </div>
+          </div>
+        </div>
+        <div
+          className="form-row"
+        >
+          <div
+            className="col"
+          >
+            <div
+              className="form-group"
+            >
+              <label
+                className="form-label"
+              >
+                Email address
+              </label>
+              <input
+                className="form-control form-control"
+                name="email"
+                onChange={[Function]}
+                placeholder="Enter email"
+                type="email"
+                value=""
+              />
+              <div
+                className="invalid-feedback"
+              />
+              <div
+                className="valid-feedback"
+              >
+                Look's good
+              </div>
+            </div>
+          </div>
+        </div>
+        <div
+          className="form-row"
+        >
+          <div
+            className="col"
+          >
+            <div
+              className="form-group"
+            >
+              <label
+                className="form-label"
+              >
+                Message
+              </label>
+              <textarea
+                className="form-control form-control"
+                name="message"
+                onChange={[Function]}
+                placeholder="Write you message here"
+                value=""
+              />
+              <div
+                className="invalid-feedback"
+              />
+              <div
+                className="valid-feedback"
+              >
+                Look's good
+              </div>
+            </div>
+          </div>
+        </div>
+        <div
+          className="form-row"
+        >
+          <button
+            className="btn btn-warning"
+            disabled={true}
+            type="submit"
+          >
+            Send
+          </button>
+        </div>
+        <br />
+      </form>
     </div>
   </div>
 </div>

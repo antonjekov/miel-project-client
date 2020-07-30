@@ -10,11 +10,6 @@ exports[`matches snapshot 1`] = `
     }
   }
 >
-  <img
-    className="card-img-top"
-    data-testid="subcategoryImage"
-    src="https://res.cloudinary.com/mielproject/image/upload/v1594124893/hbezpw1k9wzxgth1yovb.jpg"
-  />
   <div
     className="card-body"
   >
@@ -23,7 +18,14 @@ exports[`matches snapshot 1`] = `
       data-testid="productsHref"
       href="/products/5edbd65159792f2e580f5491/5f046a611f1f5d130809bdd1"
     >
-      acacia
+      <img
+        className="card-img-top"
+        data-testid="subcategoryImage"
+        src="https://res.cloudinary.com/mielproject/image/upload/v1594124893/hbezpw1k9wzxgth1yovb.jpg"
+      />
+      <div>
+        acacia
+      </div>
     </a>
   </div>
 </div>

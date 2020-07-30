@@ -20,7 +20,7 @@ const productService = {
     },
 
     delete: (productId)=>{
-        return fetch(`${REACT_APP_SERVER_API_URL}${productId}`, {
+        return fetch(`${REACT_APP_SERVER_API_URL}products-delete/${productId}`, {
             method: 'GET',
             credentials: 'include'
           });

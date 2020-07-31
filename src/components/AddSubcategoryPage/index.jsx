@@ -1,6 +1,5 @@
-import React, { useState, useCallback } from 'react';
+import React, { useState} from 'react';
 import { useFormik } from "formik";
-import { useDropzone } from 'react-dropzone'
 import { useHistory } from "react-router-dom";
 import { useAuth } from "../../contexts/Auth";
 import claudinaryService from "../../services/claudinaryService";
@@ -8,6 +7,8 @@ import subcategoryService from "../../services/subcategory_service";
 import subcategorySchema from "../../schemas/subcategorySchema";
 import { Form, Button, Col, Image, Spinner, Alert } from 'react-bootstrap';
 import styles from './index.module.css';
+import InputFilePicker from "../InputFilePicker"
+
 
 function AddSubcategory(props) {
 
@@ -51,7 +52,7 @@ function AddSubcategory(props) {
                     actions.resetForm();
                     SetUploadedFileCloudinaryUrl('')
                     setShow(true)
-                    setTimeout(()=>{setShow(false)},3000)
+                    setTimeout(() => { setShow(false) }, 3000)
                 })
                 .catch(err => {
                     // What must happen if have server error
@@ -59,14 +60,6 @@ function AddSubcategory(props) {
                 });
         }
     });
-
-    //Dropzone integration hook
-    const onDrop = useCallback(acceptedFiles => {
-        handleImageUpload(acceptedFiles[0]);
-    }, [])
-    const { getRootProps, getInputProps } = useDropzone({
-        accept: 'image/jpeg, image/png', multiple: false, onDrop
-    })
 
     const handleImageUpload = async (file) => {
         setIsLoading(true);
@@ -77,7 +70,7 @@ function AddSubcategory(props) {
     }
 
     let categoryOptions = categories.map(category => <option key={category._id}>{category.name}</option>)
-    const buttonDisabled = (!!Object.keys(errors).length)||(values.category==='')
+    const buttonDisabled = (!!Object.keys(errors).length) || (values.category === '')
 
     return (
         <Col md={{ offset: 3, span: 6 }}>
@@ -101,7 +94,7 @@ function AddSubcategory(props) {
                         <Col>
                             <Form.Group >
                                 <Form.Label>Subcategory</Form.Label>
-                                <Form.Control  type="text" placeholder="Subcategory name" value={values.subcategory} name='subcategory' onChange={handleChange} isInvalid={!!errors.subcategory} isValid={values.subcategory && !errors.subcategory}>
+                                <Form.Control type="text" placeholder="Subcategory name" value={values.subcategory} name='subcategory' onChange={handleChange} isInvalid={!!errors.subcategory} isValid={values.subcategory && !errors.subcategory}>
                                 </Form.Control>
                                 <Form.Control.Feedback type='invalid' >{errors.subcategory}</Form.Control.Feedback>
                                 <Form.Control.Feedback type='valid'>Look's good</Form.Control.Feedback>
@@ -112,23 +105,20 @@ function AddSubcategory(props) {
 
                     <Form.Row>
                         <Col>
-                        <Form.Group >
-                            <Form.Label>Description</Form.Label>
-                            <Form.Control  type="text" placeholder="Description" value={values.description} name='description' onChange={handleChange} isInvalid={!!errors.description} isValid={values.description && !errors.description}>
-                            </Form.Control>
-                            <Form.Control.Feedback type='invalid' >{errors.description}</Form.Control.Feedback>
-                            <Form.Control.Feedback type='valid'>Look's good</Form.Control.Feedback>
-                        </Form.Group>
+                            <Form.Group >
+                                <Form.Label>Description</Form.Label>
+                                <Form.Control type="text" placeholder="Description" value={values.description} name='description' onChange={handleChange} isInvalid={!!errors.description} isValid={values.description && !errors.description}>
+                                </Form.Control>
+                                <Form.Control.Feedback type='invalid' >{errors.description}</Form.Control.Feedback>
+                                <Form.Control.Feedback type='valid'>Look's good</Form.Control.Feedback>
+                            </Form.Group>
                         </Col>
                     </Form.Row>
 
                     <Form.Row>
                         <Col>
-                            <div>
-                                <div className={styles['drop-zone']} {...getRootProps()}>
-                                    <input  {...getInputProps()} />
-                                Click to select image or drag it here.
-                            </div>
+                            <div>                                
+                            <InputFilePicker text="Click to add subcategory image" onChange={(event) => handleImageUpload(event.target.files[0])}/>
                                 <br></br>
                                 <div>
                                     {isLoading ? <Spinner animation="border" variant="warning" /> : null}
@@ -141,7 +131,7 @@ function AddSubcategory(props) {
                             </div>
                         </Col>
                         <Col>
-                            <Form.Control disabled={true}  type="text" placeholder="Image Url" value={uploadedFileCloudinaryUrl} isInvalid={!uploadedFileCloudinaryUrl} isValid={uploadedFileCloudinaryUrl} />
+                            <Form.Control disabled={true} type="text" placeholder="Image Url" value={uploadedFileCloudinaryUrl} isInvalid={!uploadedFileCloudinaryUrl} isValid={uploadedFileCloudinaryUrl} />
                             <Form.Control.Feedback type='invalid' >{imageUrlError}</Form.Control.Feedback>
                             <Form.Control.Feedback type='valid'>Look's good</Form.Control.Feedback>
                         </Col>
@@ -158,7 +148,7 @@ function AddSubcategory(props) {
 
                 <Alert variant="success" show={show} onClose={() => setShow(false)} dismissible='true'>
                     <Alert.Heading>Subcategory successfuly added !</Alert.Heading>
-                </Alert>                
+                </Alert>
             </div>
         </Col>
     );

@@ -1,0 +1,13 @@
+.filePicker {
+    background: #ffc107;
+    border: 1px solid transparent;
+    padding: .375rem .75rem;
+    font-size: 1rem;
+    line-height: 1.5;
+    border-radius: .25rem;
+    transition: .15s;
+}
+
+.filePicker:hover {
+    background: #e9af03;    
+}

@@ -9,6 +9,7 @@ import LoginPage from './components/LoginPage';
 import RegisterPage from './components/RegisterPage';
 import CategoryPage from "./components/CategoryPage";
 import AddProductPage from './components/AddProductPage';
+import EditProductPage from "./components/EditProductPage";
 import AddSubcategoryPage from "./components/AddSubcategoryPage";
 import HomePage from "./components/HomePage" ;
 import SubcategoryProductsPage from "./components/SubcategoryProductsPage";
@@ -78,6 +79,8 @@ function App() {
                     <Route path="/register" component={RegisterPage} />
 
                     <PrivateRoute path="/add-product" autorized="admin" component={AddProductPage} />
+
+                    <PrivateRoute path="/edit-product/:id" autorized="admin" component={EditProductPage} />
 
                     <PrivateRoute path="/add-subcategory" autorized="admin" component={AddSubcategoryPage} />
 

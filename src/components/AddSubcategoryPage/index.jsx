@@ -64,9 +64,14 @@ function AddSubcategory(props) {
     const handleImageUpload = async (file) => {
         setIsLoading(true);
         const { url, error } = await claudinaryService.upload(file)
+        if (url) {
+            uploadedFileCloudinaryUrl&&claudinaryService.delete(uploadedFileCloudinaryUrl);
+            SetUploadedFileCloudinaryUrl(url);
+        }
+        if (error) {
+            SetImageUrlError(error);
+        }
         setIsLoading(false)
-        url && SetUploadedFileCloudinaryUrl(url);
-        error && SetImageUrlError(error);
     }
 
     let categoryOptions = categories.map(category => <option key={category._id}>{category.name}</option>)

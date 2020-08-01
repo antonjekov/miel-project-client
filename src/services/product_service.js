@@ -12,9 +12,20 @@ const productService = {
           });
     },
     
-    getAll: ()=>{
-        return fetch(`${REACT_APP_SERVER_API_URL}products`, {
+    getAll: (id)=>{
+        return fetch(`${REACT_APP_SERVER_API_URL}products/${id}`, {
             method: 'GET',
+            credentials: 'include'
+          });
+    },
+
+    edit: (data)=>{
+        let headers = new Headers();
+        headers.append("Content-Type", "application/json");
+        return fetch(`${REACT_APP_SERVER_API_URL}edit-product`, {
+            method: 'POST',
+            headers:headers,
+            body: JSON.stringify(data),
             credentials: 'include'
           });
     },

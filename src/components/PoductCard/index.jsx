@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Fragment } from "react";
 import { Card, Button } from 'react-bootstrap';
 import styles from './index.module.css';
 import productService from "../../services/product_service";
@@ -11,11 +11,15 @@ function ProductCard(props) {
     const role = userInfo ? userInfo.role : ''
     const { availability, _id, name, description, price } = props.product
     const history = useHistory()
+
     async function deleteProduct() {
         productService.delete(_id);
         window.location.reload(false);
     }
 
+    async function editProduct() {
+        history.push(`/edit-product/${_id}`) 
+    }
 
     const addToShoppingCard = async () => {
         const res = await shoppingCart_service.shoppingCardAdd({productId: _id })
@@ -43,8 +47,13 @@ function ProductCard(props) {
                     {`${price?.toFixed(2)} €`}
                 </Card.Text> : ''}
 
-                {role === 'admin' ? <Button variant="danger" onClick={deleteProduct}>Delete product</Button> : ''}
-                {role !== 'admin' && availability.toLowerCase() === 'available' ? <Button variant="warning" onClick={addToShoppingCard} >Add to Shopping Card</Button> : ''}
+                {role === 'admin' ? 
+                <Fragment>
+                <Button variant="danger" onClick={deleteProduct}>Delete product</Button><br></br>
+                <Button variant="warning" onClick={editProduct}>Edit product</Button> 
+                </Fragment>: ''}
+                {role !== 'admin' && availability.toLowerCase() === 'available' ? 
+                <Button variant="warning" onClick={addToShoppingCard} >Add to Shopping Card</Button> : ''}
             </Card.Body>
         </Card>
     );

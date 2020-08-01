@@ -1,22 +1,37 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { useHistory } from "react-router-dom";
 import { useFormik } from "formik";
-import { Form, Button, Col, Image, Spinner, Alert } from 'react-bootstrap';
-import styles from './index.module.css';
+import { Form, Button, Col, Image, Spinner } from 'react-bootstrap';
 import productSchema from "../../schemas/productSchema";
 import productService from "../../services/product_service";
 import claudinaryService from "../../services/claudinaryService";
-import { useAuth } from "../../contexts/Auth";
-import { useHistory } from "react-router-dom";
 import InputFilePicker from "../InputFilePicker"
-function AddProduct(props) {
 
-    //Other hooks
-    const history = useHistory()
-    const { categories } = useAuth();
+function EditProductPage(props) {
+    const productId = props.match.params.id;
+    const [product, setProduct] = useState({})
     const [uploadedFileCloudinaryUrl, SetUploadedFileCloudinaryUrl] = useState('');
     const [imageUrlError, SetImageUrlError] = useState('')
     const [isLoading, setIsLoading] = useState(false);
-    const [show, setShow] = useState(false);
+    const history = useHistory()
+    useEffect(() => {
+        async function fetchData() {
+            const result = await productService.getAll(productId)
+            if (!result.ok) {
+                return
+            }
+            const productInfo = await result.json()
+            values.name = productInfo.name
+            values.price = productInfo.price
+            values.availability = productInfo.availability
+            values.category=productInfo.category
+            values.subcategory=productInfo.subcategory
+            SetUploadedFileCloudinaryUrl(productInfo.imageUrl)
+            setProduct(productInfo)
+        }
+        fetchData()
+    }, [productId])
+
 
     //Formik integration hook
     const { handleSubmit, handleChange, errors, values } = useFormik({
@@ -26,6 +41,7 @@ function AddProduct(props) {
             subcategory: '',
             price: 0,
             availability: '',
+            imageUrl: ''
         },
         validationSchema: productSchema,
         onSubmit(values, actions) {
@@ -34,7 +50,7 @@ function AddProduct(props) {
                 return
             }
             values['imageUrl'] = uploadedFileCloudinaryUrl;
-            productService.add(values).then(async res => {
+            productService.edit({...product,...values}).then(async res => {
                 if (res.status === 401) {
                     history.push('/login')
                     return
@@ -46,10 +62,7 @@ function AddProduct(props) {
                     return
                 }
                 setIsLoading(false);
-                actions.resetForm();
-                SetUploadedFileCloudinaryUrl('')
-                setShow(true)
-                setTimeout(() => { setShow(false) }, 3000)
+                history.goBack()
             })
                 .catch(err => {
                     // What must happen if have server error
@@ -57,7 +70,7 @@ function AddProduct(props) {
                 });
         }
     });
-    
+
     const handleImageUpload = async (file) => {
         setIsLoading(true);
         const { url, error } = await claudinaryService.upload(file)
@@ -71,16 +84,12 @@ function AddProduct(props) {
         setIsLoading(false)
     }
 
-    let categoryOptions = categories.map(category => <option key={category._id}>{category.name}</option>)
-    let result = categories && categories.find(x => x.name === values.category)
-    let subcategoryOptions = result && result.subcategories.map(x => <option key={x._id}>{x.name}</option>)
-
     const buttonDisabled = (!!Object.keys(errors).length) || (values.name === '')
 
     return (
         <Col md={{ offset: 3, span: 6 }}>
-            <div className={styles.AddProduct}>
-                <h1>Add Product</h1>
+            <div >
+                <h1>Edit Product</h1>
                 <Form onSubmit={handleSubmit}>
                     <Form.Row>
                         <Col>
@@ -94,28 +103,6 @@ function AddProduct(props) {
                     </Form.Row>
 
                     <Form.Row>
-                        <Col>
-                            <Form.Group controlId="category">
-                                <Form.Label >Category</Form.Label>
-                                <Form.Control as="select" value={values.category} name='category' onChange={handleChange} isInvalid={!!errors.category} isValid={values.category && !errors.category}>
-                                    <option></option>
-                                    {categoryOptions}
-                                </Form.Control>
-                                <Form.Control.Feedback type='invalid' >{errors.category}</Form.Control.Feedback>
-                                <Form.Control.Feedback type='valid'>Look's good</Form.Control.Feedback>
-                            </Form.Group>
-                        </Col>
-                        <Col>
-                            <Form.Group >
-                                <Form.Label>Subcategory</Form.Label>
-                                <Form.Control as="select" value={values.subcategory} name='subcategory' onChange={handleChange} isInvalid={!!errors.subcategory} isValid={values.subcategory && !errors.subcategory}>
-                                    <option></option>
-                                    {subcategoryOptions}
-                                </Form.Control>
-                                <Form.Control.Feedback type='invalid' >{errors.subcategory}</Form.Control.Feedback>
-                                <Form.Control.Feedback type='valid'>Look's good</Form.Control.Feedback>
-                            </Form.Group>
-                        </Col>
                         <Col>
                             <Form.Group >
                                 <Form.Label>Price</Form.Label>
@@ -141,40 +128,35 @@ function AddProduct(props) {
                     <Form.Row>
                         <Col>
                             <div>
-                                <InputFilePicker text="Click to add product image" onChange={(event) => handleImageUpload(event.target.files[0])}/>
-                                    <br></br>
+                                <InputFilePicker text="Click to change product image" onChange={(event) => handleImageUpload(event.target.files[0])} />
+                                {isLoading ? <Spinner animation="border" variant="warning" /> : null}
+                                {uploadedFileCloudinaryUrl === '' ? null :
                                     <div>
-                                        {isLoading ? <Spinner animation="border" variant="warning" /> : null}
-                                        {uploadedFileCloudinaryUrl === '' ? null :
-                                            <div>
-                                                <Image src={uploadedFileCloudinaryUrl} height="160" width="160" thumbnail />
-                                            </div>}
-                                    </div>
-                                    <br></br>
+                                        <Image src={uploadedFileCloudinaryUrl} height="160" width="160" thumbnail />
+                                    </div>}
+                                <br></br>
                             </div>
                         </Col>
-                            <Col>
-                                <Form.Control disabled={true} type="text" placeholder="Image Url" value={uploadedFileCloudinaryUrl} isInvalid={!uploadedFileCloudinaryUrl} isValid={uploadedFileCloudinaryUrl} />
-                                <Form.Control.Feedback type='invalid' >{imageUrlError}</Form.Control.Feedback>
-                                <Form.Control.Feedback type='valid'>Look's good</Form.Control.Feedback>
-                            </Col>
+                        <Col>
+                            <Form.Control disabled={true} type="text" placeholder="Image Url" value={uploadedFileCloudinaryUrl} isInvalid={!uploadedFileCloudinaryUrl} isValid={uploadedFileCloudinaryUrl} />
+                            <Form.Control.Feedback type='invalid' >{imageUrlError}</Form.Control.Feedback>
+                            <Form.Control.Feedback type='valid'>Look's good</Form.Control.Feedback>
+                        </Col>
                     </Form.Row>
 
-                        <Form.Row>
-                            <Col>
-                                <Button variant="warning" type="submit" disabled={buttonDisabled}>
-                                    Add Product
+                    <Form.Row>
+                        <Col>
+                            <Button variant="warning" type="submit" disabled={buttonDisabled}>
+                                Edit Product
                         </Button>
-                            </Col>
-                        </Form.Row>
+                        </Col>
+                    </Form.Row>
                 </Form>
-                    <Alert variant="success" show={show} onClose={() => setShow(false)} dismissible='true'>
-                        <p>Product successfuly added !</p>
-                    </Alert>
+                <br></br>
             </div>
         </Col>
 
-    );
+    )
 }
 
-export default AddProduct
+export default EditProductPage

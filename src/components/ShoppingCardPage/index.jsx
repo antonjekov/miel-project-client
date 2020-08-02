@@ -39,6 +39,10 @@ function ShoppingCard(props) {
         acc += curr.price * curr.quantity
         return acc
     }, 0)
+    const discount = productsInCart.reduce((acc, curr) => {
+        acc += curr.discount?curr.discount/100*curr.price * curr.quantity:0
+        return acc
+    }, 0)
     const shipping = 5;
     
     const checkout = async () => {
@@ -56,7 +60,7 @@ function ShoppingCard(props) {
 
     return (
         <Fragment>
-            <Col md={{ offset: 2, span: 9 }}>
+            <Col md={{ offset: 1, span: 9 }}>
                 <Container className={styles.ProductsContainer}>
                     {products}
                 </Container>
@@ -73,13 +77,19 @@ function ShoppingCard(props) {
                                             <td>Subtotal: </td>
                                             <td className={styles.right}>{subtotal.toFixed(2)} €</td>
                                         </tr>
+                                        {discount?
+                                        <tr>
+                                            <td>Discounts: </td>
+                                            <td className={styles.right}>-{discount.toFixed(2)} €</td>
+                                        </tr>:''                                        
+                                        }
                                         <tr>
                                             <td>Shipping: </td>
                                             <td className={styles.right}>{shipping.toFixed(2)} €</td>
                                         </tr>
                                         <tr>
                                             <th>Total: </th>
-                                            <th className={styles.right}>{(subtotal + shipping).toFixed(2)} €</th>
+                                            <th className={styles.right}>{(subtotal-discount + shipping).toFixed(2)} €</th>
                                         </tr>
                                     </tbody>
                                 </table>

@@ -4,10 +4,11 @@ import { Image, Col, Row, Button, ButtonGroup } from 'react-bootstrap';
 import { useAuth } from "../../contexts/Auth";
 import styles from "./index.module.css";
 import { useHistory } from "react-router-dom";
+import ProductPrice from "../ProductPrice";
 
 function ProductInShoppingCart(props) {
     const history = useHistory()
-    const { _id, imageUrl, name, quantity, price } = props.product
+    const { _id, imageUrl, name, quantity, price, discount } = props.product
     const {  setUserInfo } = useAuth();
     const deleteOneFromCart = async () => {
         const res = await shoppingCart_service.deleteOneFromShoppingCard({productId: _id });
@@ -47,8 +48,11 @@ function ProductInShoppingCart(props) {
             <Col md={2}>
                 <Image className={styles.ProductImage} src={imageUrl} thumbnail />
             </Col>
-            <Col md={4}>
+            <Col md={3}>
                 <span>{name}</span>
+            </Col>
+            <Col md={2}>
+            <ProductPrice product={props.product}></ProductPrice>
             </Col>
             <Col md={2}>
                 <ButtonGroup aria-label="Basic example">
@@ -60,7 +64,7 @@ function ProductInShoppingCart(props) {
                 </ButtonGroup>
             </Col>
             <Col md={2}>
-                <span>{(price * quantity).toFixed(2)} €</span>
+                <span>{((price-(discount?discount/100*price:0)) * quantity).toFixed(2)} €</span>
             </Col>
             <Col md={1}>
                 <Button variant="secondary" size='sm' onClick={deleteAllFromShoppingCart}>X</Button>

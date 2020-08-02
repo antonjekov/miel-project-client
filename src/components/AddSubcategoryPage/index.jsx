@@ -47,7 +47,6 @@ function AddSubcategory(props) {
                         actions.setErrors(errorsObject)
                         return
                     }
-                    //Place to catch status 500
                     setIsLoading(false);
                     actions.resetForm();
                     SetUploadedFileCloudinaryUrl('')

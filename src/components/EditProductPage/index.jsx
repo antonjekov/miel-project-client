@@ -26,6 +26,7 @@ function EditProductPage(props) {
             values.availability = productInfo.availability
             values.category=productInfo.category
             values.subcategory=productInfo.subcategory
+            values.discount=productInfo.discount
             SetUploadedFileCloudinaryUrl(productInfo.imageUrl)
             setProduct(productInfo)
         }
@@ -40,6 +41,7 @@ function EditProductPage(props) {
             category: '',
             subcategory: '',
             price: 0,
+            discount:0,
             availability: '',
             imageUrl: ''
         },
@@ -109,6 +111,14 @@ function EditProductPage(props) {
                                 <Form.Control type="number" name='price' value={values.price} onChange={handleChange} isInvalid={!!errors.price} isValid={values.price && !errors.price} />
                             </Form.Group>
                             <Form.Control.Feedback type='invalid'>{errors.price}</Form.Control.Feedback>
+                            <Form.Control.Feedback type='valid'>Look's good</Form.Control.Feedback>
+                        </Col>
+                        <Col>
+                            <Form.Group >
+                                <Form.Label>Discount</Form.Label>
+                                <Form.Control type="number" name='discount' value={values.discount} onChange={handleChange} isInvalid={!!errors.discount} isValid={values.discount && !errors.discount} />
+                            </Form.Group>
+                            <Form.Control.Feedback type='invalid'>{errors.discount}</Form.Control.Feedback>
                             <Form.Control.Feedback type='valid'>Look's good</Form.Control.Feedback>
                         </Col>
                         <Col>

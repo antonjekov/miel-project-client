@@ -1,6 +1,5 @@
 import React, { Fragment } from "react";
 import styles from "./index.module.css";
-import { Card } from 'react-bootstrap';
 
 function ProductPrice(props) {
     const { availability, price, discount } = props.product

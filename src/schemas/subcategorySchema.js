@@ -5,7 +5,7 @@ const subcategorySchema = yup.object().shape({
         .string()
         .required("Product category is Required"),
         
-    subcategory: yup
+    name: yup
         .string()
         .max(50, "Subcategory name must be max 50 chars")
         .min(3, "Subcategory name must be min 3 chars")

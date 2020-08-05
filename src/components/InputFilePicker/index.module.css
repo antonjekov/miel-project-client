@@ -6,8 +6,13 @@
     line-height: 1.5;
     border-radius: .25rem;
     transition: .15s;
+    margin-bottom: 1rem;
 }
 
 .filePicker:hover {
     background: #e9af03;    
+}
+
+.image{
+    margin-bottom: 1rem;
 }

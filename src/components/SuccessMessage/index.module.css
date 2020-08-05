@@ -1,0 +1,10 @@
+.SuccessMessage{
+    background-color: #d4edda;
+    border: solid 1px #c3e6cb;
+    border-radius: 4px;
+    margin: 1rem 0rem;
+}
+
+p{
+    margin: 1rem;
+}

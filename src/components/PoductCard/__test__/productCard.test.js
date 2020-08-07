@@ -26,12 +26,12 @@ it('renders without crashing', ()=>{
                     ,div)
 })
 
-test("displays correct button 'Delete product'", () =>{
+test("displays correct button 'Delete'", () =>{
     render(<AuthContext.Provider value={{ userInfo:userAdmin, setUserInfo}}>
         <ProductCard product={productAvailable}/>
     </AuthContext.Provider>
     )
-    expect(screen.getByText("Delete product")).toBeVisible()
+    expect(screen.getByText("Delete")).toBeVisible()
     const addButton = screen.queryByText("Add to Shopping Card")
     expect(addButton).not.toBeInTheDocument()
   })

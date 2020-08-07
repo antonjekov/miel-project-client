@@ -5,7 +5,7 @@ exports[`matches snapshot 1`] = `
   className="col-md-6 offset-md-3"
 >
   <div
-    className="AddProduct"
+    className="FormWrapper"
   >
     <h1>
       Add Product
@@ -26,13 +26,13 @@ exports[`matches snapshot 1`] = `
             <label
               className="form-label"
             >
-              Product name
+              Name
             </label>
             <input
-              className="form-control"
+              className="form-control form-control"
               name="name"
               onChange={[Function]}
-              placeholder="Product name"
+              placeholder="Enter name"
               type="text"
               value=""
             />
@@ -63,7 +63,7 @@ exports[`matches snapshot 1`] = `
               Category
             </label>
             <select
-              className="form-control"
+              className="form-control form-control"
               id="category"
               name="category"
               onChange={[Function]}
@@ -105,7 +105,7 @@ exports[`matches snapshot 1`] = `
               Subcategory
             </label>
             <select
-              className="form-control"
+              className="form-control form-control"
               name="subcategory"
               onChange={[Function]}
               value=""
@@ -134,20 +134,48 @@ exports[`matches snapshot 1`] = `
               Price
             </label>
             <input
-              className="form-control"
+              className="form-control form-control"
               name="price"
               onChange={[Function]}
               type="number"
               value={0}
             />
+            <div
+              className="invalid-feedback"
+            />
+            <div
+              className="valid-feedback"
+            >
+              Look's good
+            </div>
           </div>
+        </div>
+        <div
+          className="col"
+        >
           <div
-            className="invalid-feedback"
-          />
-          <div
-            className="valid-feedback"
+            className="form-group"
           >
-            Look's good
+            <label
+              className="form-label"
+            >
+              Discount
+            </label>
+            <input
+              className="form-control form-control"
+              name="discount"
+              onChange={[Function]}
+              type="number"
+              value={0}
+            />
+            <div
+              className="invalid-feedback"
+            />
+            <div
+              className="valid-feedback"
+            >
+              Look's good
+            </div>
           </div>
         </div>
         <div
@@ -162,7 +190,7 @@ exports[`matches snapshot 1`] = `
               Availability
             </label>
             <select
-              className="form-control"
+              className="form-control form-control"
               name="availability"
               onChange={[Function]}
               value=""
@@ -190,63 +218,50 @@ exports[`matches snapshot 1`] = `
         className="form-row"
       >
         <div
-          className="col"
+          className="col-md-9"
         >
-          <div>
+          <div
+            className="form-group"
+          >
+            <input
+              className="form-control is-invalid"
+              disabled={true}
+              placeholder="Image Url"
+              type="text"
+              value=""
+            />
             <div
-              className="drop-zone"
-              onBlur={[Function]}
-              onClick={[Function]}
-              onDragEnter={[Function]}
-              onDragLeave={[Function]}
-              onDragOver={[Function]}
-              onDrop={[Function]}
-              onFocus={[Function]}
-              onKeyDown={[Function]}
-              tabIndex={0}
+              className="invalid-feedback"
             >
-              <input
-                accept="image/jpeg, image/png"
-                autoComplete="off"
-                multiple={false}
-                onChange={[Function]}
-                onClick={[Function]}
-                style={
-                  Object {
-                    "display": "none",
-                  }
-                }
-                tabIndex={-1}
-                type="file"
-              />
-              Click to select image or drag it here.
+              Image is required!
             </div>
-            <br />
-            <div />
-            <br />
+            <div
+              className="valid-feedback"
+            >
+              Look's good
+            </div>
           </div>
+          <label
+            className="filePicker"
+            htmlFor="filePicker"
+          >
+            Click to add product image
+          </label>
+          <input
+            accept="image/*"
+            id="filePicker"
+            onChange={[Function]}
+            style={
+              Object {
+                "visibility": "hidden",
+              }
+            }
+            type="file"
+          />
         </div>
         <div
           className="col"
-        >
-          <input
-            className="form-control is-invalid"
-            disabled={true}
-            placeholder="Image Url"
-            type="text"
-            value=""
-          />
-          <div
-            className="invalid-feedback"
-          >
-            
-          </div>
-          <div
-            className="valid-feedback"
-          >
-            Look's good
-          </div>
-        </div>
+        />
       </div>
       <div
         className="form-row"
@@ -255,11 +270,23 @@ exports[`matches snapshot 1`] = `
           className="col"
         >
           <button
-            className="btn btn-warning"
+            className="btn btn-danger"
             disabled={true}
             type="submit"
           >
-            Add Product
+                        Add Product
+          </button>
+        </div>
+        <div
+          className="col"
+        >
+          <button
+            className="btn btn-warning"
+            disabled={false}
+            onClick={[Function]}
+            type="button"
+          >
+            Cancel
           </button>
         </div>
       </div>

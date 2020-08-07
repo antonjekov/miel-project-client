@@ -13,7 +13,7 @@ test("inputs update on change", () =>{
     const userInput = queryByPlaceholderText('Enter email')
     fireEvent.change(userInput,{target:{value: 'test'}})
     expect(userInput.value).toBe('test')
-    const passwordInput = queryByPlaceholderText('Password')
+    const passwordInput = queryByPlaceholderText('Enter your password')
     fireEvent.change(passwordInput,{target:{value: '123456'}})
     expect(passwordInput.value).toBe('123456')
   })

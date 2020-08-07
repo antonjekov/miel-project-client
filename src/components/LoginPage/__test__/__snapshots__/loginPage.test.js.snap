@@ -5,18 +5,15 @@ exports[`matches snapshot 1`] = `
   className="col-md-4 offset-md-4"
 >
   <div
-    className="Login"
+    className="FormWrapper"
   >
+    <h1>
+      Login
+    </h1>
     <form
       className=""
       onSubmit={[Function]}
     >
-      <div>
-        <h1>
-          Login
-        </h1>
-      </div>
-      <br />
       <div
         className="form-row"
       >
@@ -68,7 +65,7 @@ exports[`matches snapshot 1`] = `
               className="form-control form-control"
               name="password"
               onChange={[Function]}
-              placeholder="Password"
+              placeholder="Enter your password"
               type="password"
               value=""
             />

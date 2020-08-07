@@ -15,7 +15,7 @@ test("input name update on change", () =>{
     <AuthContext.Provider value={{ categories:categories}}>
       <AddProductPage/>
     </AuthContext.Provider>)
-    const nameInput = queryByPlaceholderText('Product name')
+    const nameInput = queryByPlaceholderText('Enter name')
     fireEvent.change(nameInput,{target:{value: 'test'}})
     expect(nameInput.value).toBe('test')
     

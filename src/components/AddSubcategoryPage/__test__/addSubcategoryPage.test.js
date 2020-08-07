@@ -15,7 +15,7 @@ test("inputs subcategory and description update on change", () =>{
     <AuthContext.Provider value={{ categories:categories}}>
       <AddSubcategoryPage/>
     </AuthContext.Provider>)
-    const nameInput = queryByPlaceholderText('Subcategory name')
+    const nameInput = queryByPlaceholderText('Enter name')
     fireEvent.change(nameInput,{target:{value: 'subcategory'}})
     expect(nameInput.value).toBe('subcategory')
     

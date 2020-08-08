@@ -1,23 +1,17 @@
-#navTitle{
-    color: orange;
-    font-weight: bold; 
+.AsideNavbar {
+    position: fixed;
+    flex-direction: column;
 }
 
-a{
+#navTitle {
+    color: orange;
+    font-weight: bold;
+}
+
+a {
     color: black;
 }
 
-a:hover{
+a:hover {
     color: rgb(9, 211, 69);
 }
-
-
-
-
-
-
-
-
-
-
-

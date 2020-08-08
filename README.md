@@ -15,10 +15,10 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 react-bootstrap - ready for use stiled components<br />
 formic and yup - yup for make schema and formic for validate data in form input fields<br />
 claudinary - used for save all images in application<br />
-dropzone - we use this library in Add product and Add Subcategory page <br />
 Google Maps Api - used in Contact page for represent interactive map with marked our phisical sell points.<br />
 @testing-library/react - used in developer mode for test components<br />
 react-test-renderer - used in developer mode for test components<br />
+cypress - used in developer mode for integration tests<br />
 nodemailer - used in server part for send messages from Contact page
 
 ## Getting Started
@@ -32,6 +32,9 @@ nodemailer - used in server part for send messages from Contact page
 ## Available Scripts
 
 In the project directory, you can run:
+
+### `npm run cypress:open
+Runs the cypress integration tests.<br/>
 
 ### `npm start`
 

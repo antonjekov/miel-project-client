@@ -1,15 +1,12 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`matches snapshot 1`] = `
+exports[`AddProductPage matches snapshot 1`] = `
 <div
   className="col-md-6 offset-md-3"
 >
-  <div
-    className="FormWrapper"
+  <FormContentWrapper
+    title="Add Product"
   >
-    <h1>
-      Add Product
-    </h1>
     <form
       className=""
       onSubmit={[Function]}
@@ -20,247 +17,139 @@ exports[`matches snapshot 1`] = `
         <div
           className="col"
         >
-          <div
-            className="form-group"
-          >
-            <label
-              className="form-label"
-            >
-              Name
-            </label>
-            <input
-              className="form-control form-control"
-              name="name"
-              onChange={[Function]}
-              placeholder="Enter name"
-              type="text"
-              value=""
-            />
-            <div
-              className="invalid-feedback"
-            />
-            <div
-              className="valid-feedback"
-            >
-              Look's good
-            </div>
-          </div>
-        </div>
-      </div>
-      <div
-        className="form-row"
-      >
-        <div
-          className="col"
-        >
-          <div
-            className="form-group"
-          >
-            <label
-              className="form-label"
-              htmlFor="category"
-            >
-              Category
-            </label>
-            <select
-              className="form-control form-control"
-              id="category"
-              name="category"
-              onChange={[Function]}
-              value=""
-            >
-              <option />
-              <option>
-                honey
-              </option>
-              <option>
-                cosmetics
-              </option>
-              <option>
-                other bee products
-              </option>
-              <option>
-                apitherapy
-              </option>
-            </select>
-            <div
-              className="invalid-feedback"
-            />
-            <div
-              className="valid-feedback"
-            >
-              Look's good
-            </div>
-          </div>
-        </div>
-        <div
-          className="col"
-        >
-          <div
-            className="form-group"
-          >
-            <label
-              className="form-label"
-            >
-              Subcategory
-            </label>
-            <select
-              className="form-control form-control"
-              name="subcategory"
-              onChange={[Function]}
-              value=""
-            >
-              <option />
-            </select>
-            <div
-              className="invalid-feedback"
-            />
-            <div
-              className="valid-feedback"
-            >
-              Look's good
-            </div>
-          </div>
-        </div>
-        <div
-          className="col"
-        >
-          <div
-            className="form-group"
-          >
-            <label
-              className="form-label"
-            >
-              Price
-            </label>
-            <input
-              className="form-control form-control"
-              name="price"
-              onChange={[Function]}
-              type="number"
-              value={0}
-            />
-            <div
-              className="invalid-feedback"
-            />
-            <div
-              className="valid-feedback"
-            >
-              Look's good
-            </div>
-          </div>
-        </div>
-        <div
-          className="col"
-        >
-          <div
-            className="form-group"
-          >
-            <label
-              className="form-label"
-            >
-              Discount
-            </label>
-            <input
-              className="form-control form-control"
-              name="discount"
-              onChange={[Function]}
-              type="number"
-              value={0}
-            />
-            <div
-              className="invalid-feedback"
-            />
-            <div
-              className="valid-feedback"
-            >
-              Look's good
-            </div>
-          </div>
-        </div>
-        <div
-          className="col"
-        >
-          <div
-            className="form-group"
-          >
-            <label
-              className="form-label"
-            >
-              Availability
-            </label>
-            <select
-              className="form-control form-control"
-              name="availability"
-              onChange={[Function]}
-              value=""
-            >
-              <option />
-              <option>
-                Available
-              </option>
-              <option>
-                Not available
-              </option>
-            </select>
-            <div
-              className="invalid-feedback"
-            />
-            <div
-              className="valid-feedback"
-            >
-              Look's good
-            </div>
-          </div>
-        </div>
-      </div>
-      <div
-        className="form-row"
-      >
-        <div
-          className="col-md-9"
-        >
-          <div
-            className="form-group"
-          >
-            <input
-              className="form-control is-invalid"
-              disabled={true}
-              placeholder="Image Url"
-              type="text"
-              value=""
-            />
-            <div
-              className="invalid-feedback"
-            >
-              Image is required!
-            </div>
-            <div
-              className="valid-feedback"
-            >
-              Look's good
-            </div>
-          </div>
-          <label
-            className="filePicker"
-            htmlFor="filePicker"
-          >
-            Click to add product image
-          </label>
-          <input
-            accept="image/*"
-            id="filePicker"
-            onChange={[Function]}
-            style={
+          <NameInput
+            errors={Object {}}
+            handleChange={[Function]}
+            values={
               Object {
-                "visibility": "hidden",
+                "availability": "",
+                "category": "",
+                "discount": 0,
+                "name": "",
+                "price": 0,
+                "subcategory": "",
               }
             }
-            type="file"
+          />
+        </div>
+      </div>
+      <div
+        className="form-row"
+      >
+        <div
+          className="col"
+        >
+          <CategoryInput
+            categoryOptions={
+              Array [
+                <option>
+                  honey
+                </option>,
+                <option>
+                  cosmetics
+                </option>,
+                <option>
+                  other bee products
+                </option>,
+                <option>
+                  apitherapy
+                </option>,
+              ]
+            }
+            errors={Object {}}
+            handleChange={[Function]}
+            values={
+              Object {
+                "availability": "",
+                "category": "",
+                "discount": 0,
+                "name": "",
+                "price": 0,
+                "subcategory": "",
+              }
+            }
           />
         </div>
         <div
           className="col"
+        >
+          <SubcategoryInput
+            errors={Object {}}
+            handleChange={[Function]}
+            values={
+              Object {
+                "availability": "",
+                "category": "",
+                "discount": 0,
+                "name": "",
+                "price": 0,
+                "subcategory": "",
+              }
+            }
+          />
+        </div>
+        <div
+          className="col"
+        >
+          <PriceInput
+            errors={Object {}}
+            handleChange={[Function]}
+            values={
+              Object {
+                "availability": "",
+                "category": "",
+                "discount": 0,
+                "name": "",
+                "price": 0,
+                "subcategory": "",
+              }
+            }
+          />
+        </div>
+        <div
+          className="col"
+        >
+          <DiscountInput
+            errors={Object {}}
+            handleChange={[Function]}
+            values={
+              Object {
+                "availability": "",
+                "category": "",
+                "discount": 0,
+                "name": "",
+                "price": 0,
+                "subcategory": "",
+              }
+            }
+          />
+        </div>
+        <div
+          className="col"
+        >
+          <AvailabilityInput
+            errors={Object {}}
+            handleChange={[Function]}
+            values={
+              Object {
+                "availability": "",
+                "category": "",
+                "discount": 0,
+                "name": "",
+                "price": 0,
+                "subcategory": "",
+              }
+            }
+          />
+        </div>
+      </div>
+      <div
+        className="form-row"
+      >
+        <InputFilePicker
+          imageUrl=""
+          setImageUrl={[Function]}
+          text="Click to add product image"
         />
       </div>
       <div
@@ -291,6 +180,10 @@ exports[`matches snapshot 1`] = `
         </div>
       </div>
     </form>
-  </div>
+    <SuccessMessage
+      message="Product successfuly added !"
+      show={false}
+    />
+  </FormContentWrapper>
 </div>
 `;

@@ -28,7 +28,7 @@ function InputFilePicker(props) {
     return (<Fragment>
         <Col md={9}>
             <Form.Group >
-                <Form.Control disabled={true} type="text" placeholder="Image Url" value={uploadedFileCloudinaryUrl} isInvalid={!uploadedFileCloudinaryUrl} isValid={uploadedFileCloudinaryUrl} />
+                <Form.Control disabled={true} name="imageUrl" type="text" placeholder="Image Url" value={uploadedFileCloudinaryUrl} isInvalid={!uploadedFileCloudinaryUrl} isValid={uploadedFileCloudinaryUrl} />
                 <Form.Control.Feedback type='invalid' >{imageUrlError}</Form.Control.Feedback>
                 <Form.Control.Feedback type='valid'>Look's good</Form.Control.Feedback>
             </Form.Group>

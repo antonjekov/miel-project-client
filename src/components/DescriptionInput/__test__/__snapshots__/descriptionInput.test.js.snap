@@ -1,0 +1,59 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`DescriptionInput matches snapshot with error 1`] = `
+<div
+  className="form-group"
+>
+  <label
+    className="form-label"
+  >
+    Description
+  </label>
+  <input
+    className="form-control form-control is-invalid"
+    name="description"
+    onChange={[Function]}
+    placeholder="Description"
+    type="text"
+    value="some description"
+  />
+  <div
+    className="invalid-feedback"
+  >
+    Some error
+  </div>
+  <div
+    className="valid-feedback"
+  >
+    Look's good
+  </div>
+</div>
+`;
+
+exports[`DescriptionInput matches snapshot without error 1`] = `
+<div
+  className="form-group"
+>
+  <label
+    className="form-label"
+  >
+    Description
+  </label>
+  <input
+    className="form-control form-control is-valid"
+    name="description"
+    onChange={[Function]}
+    placeholder="Description"
+    type="text"
+    value="some description"
+  />
+  <div
+    className="invalid-feedback"
+  />
+  <div
+    className="valid-feedback"
+  >
+    Look's good
+  </div>
+</div>
+`;

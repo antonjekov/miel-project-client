@@ -135,6 +135,7 @@ exports[`matches snapshot 1`] = `
             <input
               className="form-control is-invalid"
               disabled={true}
+              name="imageUrl"
               placeholder="Image Url"
               type="text"
               value=""

@@ -8,7 +8,7 @@ exports[`matches snapshot 1`] = `
     className="FormWrapper"
   >
     <h1>
-      Registert
+      Register
     </h1>
     <form
       className=""

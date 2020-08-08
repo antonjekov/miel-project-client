@@ -49,7 +49,7 @@ function ProductInShoppingCart(props) {
                 <Image className={styles.ProductImage} src={imageUrl} thumbnail />
             </Col>
             <Col md={3}>
-                <span>{name}</span>
+                <div className={styles.Wrapper}>{name}</div>
             </Col>
             <Col md={2}>
             <ProductPrice product={props.product}></ProductPrice>

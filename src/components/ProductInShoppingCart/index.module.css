@@ -10,3 +10,11 @@
 .Bordered {
 border: 1px solid grey;
 }
+
+.Wrapper {
+    overflow: hidden;
+}
+
+.Wrapper:hover {
+    overflow: auto;
+  }

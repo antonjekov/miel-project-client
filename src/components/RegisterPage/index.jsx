@@ -50,7 +50,7 @@ function Register(props) {
 
     return (loginSuccess ? <Redirect to='/' /> :
         <Col md={{ offset: 2, span: 8 }}>
-            <FormContentWrapper title='Registert'>
+            <FormContentWrapper title='Register'>
                 <Form onSubmit={handleSubmit}>
                     <Form.Row>
                         <Col>

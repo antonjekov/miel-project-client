@@ -105,7 +105,7 @@ exports[`matches snapshot client product available 1`] = `
     </p>
     
     <button
-      className="btn btn-warning"
+      className="Buttons btn btn-warning"
       disabled={false}
       onClick={[Function]}
       type="button"

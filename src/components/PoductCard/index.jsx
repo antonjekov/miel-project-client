@@ -49,7 +49,7 @@ function ProductCard(props) {
                 <span><Button  variant="warning" onClick={editProduct}>Edit</Button></span> 
                 </div>: ''}
                 {role !== 'admin' && availability.toLowerCase() === 'available' ? 
-                <Button variant="warning" onClick={addToShoppingCard} >Add to Shopping Card</Button> : ''}
+                <Button className={styles.Buttons} variant="warning" onClick={addToShoppingCard} >Add to Shopping Card</Button> : ''}
             </Card.Body>
         </Card>
     );

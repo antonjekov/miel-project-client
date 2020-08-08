@@ -2,7 +2,7 @@
 
 exports[`matches snapshot 1`] = `
 <div
-  className="flex-column nav"
+  className="AsideNavbar nav"
   onKeyDown={[Function]}
 >
   <a

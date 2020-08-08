@@ -12,12 +12,11 @@ function AsideNavbar(props) {
     const allSubcategories = categoryInfo && categoryInfo.subcategories.map(subcategory => <Nav.Link className={styles.navLink} key={subcategory._id} href={`/products/${categoryId}/${subcategory._id}`}>{subcategory.name}</Nav.Link>);
 
     return (
-        <Nav className="flex-column" >
+        <Nav  className={styles.AsideNavbar}>
             <Nav.Link id={styles.navTitle} disabled>{categoryInfo && categoryInfo.name.toUpperCase()}</Nav.Link>
             <br></br>
             {allSubcategories}
         </Nav>
-
     );
 }
 

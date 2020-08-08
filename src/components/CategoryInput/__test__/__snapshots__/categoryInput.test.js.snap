@@ -1,0 +1,63 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`CategoryInput matches snapshot with error 1`] = `
+<div
+  className="form-group"
+>
+  <label
+    className="form-label"
+    htmlFor="category"
+  >
+    Category
+  </label>
+  <select
+    className="form-control form-control is-invalid"
+    id="category"
+    name="category"
+    onChange={[Function]}
+    value="honey"
+  >
+    <option />
+  </select>
+  <div
+    className="invalid-feedback"
+  >
+    Some error
+  </div>
+  <div
+    className="valid-feedback"
+  >
+    Look's good
+  </div>
+</div>
+`;
+
+exports[`CategoryInput matches snapshot without error 1`] = `
+<div
+  className="form-group"
+>
+  <label
+    className="form-label"
+    htmlFor="category"
+  >
+    Category
+  </label>
+  <select
+    className="form-control form-control is-valid"
+    id="category"
+    name="category"
+    onChange={[Function]}
+    value="honey"
+  >
+    <option />
+  </select>
+  <div
+    className="invalid-feedback"
+  />
+  <div
+    className="valid-feedback"
+  >
+    Look's good
+  </div>
+</div>
+`;

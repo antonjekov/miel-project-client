@@ -1,0 +1,71 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`AvailabilityInpuet matches snapshot with error 1`] = `
+<div
+  className="form-group"
+>
+  <label
+    className="form-label"
+  >
+    Availability
+  </label>
+  <select
+    className="form-control form-control is-invalid"
+    name="availability"
+    onChange={[Function]}
+    value="Available"
+  >
+    <option />
+    <option>
+      Available
+    </option>
+    <option>
+      Not available
+    </option>
+  </select>
+  <div
+    className="invalid-feedback"
+  >
+    Some error
+  </div>
+  <div
+    className="valid-feedback"
+  >
+    Look's good
+  </div>
+</div>
+`;
+
+exports[`AvailabilityInpuet matches snapshot without error 1`] = `
+<div
+  className="form-group"
+>
+  <label
+    className="form-label"
+  >
+    Availability
+  </label>
+  <select
+    className="form-control form-control is-valid"
+    name="availability"
+    onChange={[Function]}
+    value="Available"
+  >
+    <option />
+    <option>
+      Available
+    </option>
+    <option>
+      Not available
+    </option>
+  </select>
+  <div
+    className="invalid-feedback"
+  />
+  <div
+    className="valid-feedback"
+  >
+    Look's good
+  </div>
+</div>
+`;

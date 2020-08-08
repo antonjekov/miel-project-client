@@ -35,11 +35,11 @@ function SubcategoryProducts(props) {
                 <Col md={2}><AsideNavbar categoryId={categoryId} /></Col>
                 <Col md={10}>
                     <Row className={styles.Subcategory}>
-                        <Col md={{ offset: 4, span: 2 }}>
+                        <Col md={{ offset: 2, span: 2 }}>
                             <img className={styles.SubcategoryImg} src={subcategory && subcategory.imageUrl} alt="Subcategory"></img>
                         </Col>
-                        <Col md={{ span: 2 }}>
-                            <p >{subcategory && subcategory.description}</p>
+                        <Col md={{span: 4 }}>
+                            <p ><i>{subcategory && subcategory.description}</i></p>
                         </Col>
                     </Row>
                     <Row>

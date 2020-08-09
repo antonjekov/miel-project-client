@@ -40,9 +40,6 @@ function Register(props) {
                     setUserInfo(userInfo)
                     setIsLoading(false);
                     setLoginSuccess(true);
-                })
-                .catch(err => {
-                    console.log(err)//TO DO Must have  page for Server errors ...
                 });
         }
 

@@ -63,11 +63,7 @@ function EditProductPage(props) {
                     return
                 }
                 history.goBack()
-            })
-                .catch(err => {
-                    // What must happen if have server error
-                    return
-                });
+            });
         }
     });
 

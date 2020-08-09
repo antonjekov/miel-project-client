@@ -37,8 +37,7 @@ function App() {
                 setCategories(result)
                 setLoadingCategories(false)              
             } catch (error) {
-                setLoadingCategories(false) 
-                console.log('Failed to fatch data from server')//Server error page
+                setLoadingCategories(false)
             }
         }
         fetchData()
@@ -57,7 +56,6 @@ function App() {
                 setLoadingUser(false)
             } catch (error) {
                 setLoadingUser(false)
-                console.log('Failed to fatch data from server')//Server error page
             }
         }
         fetchData()

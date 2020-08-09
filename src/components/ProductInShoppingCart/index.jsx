@@ -3,12 +3,14 @@ import shoppingCart_service from "../../services/shoppingCart_service"
 import { Image, Col, Row, Button, ButtonGroup } from 'react-bootstrap';
 import { useAuth } from "../../contexts/Auth";
 import styles from "./index.module.css";
-import { useHistory } from "react-router-dom";
+import { useHistory} from "react-router-dom";
 import ProductPrice from "../ProductPrice";
+
 
 function ProductInShoppingCart(props) {
     const history = useHistory()
     const { _id, imageUrl, name, quantity, price, discount } = props.product
+    
     const {  setUserInfo } = useAuth();
     const deleteOneFromCart = async () => {
         const res = await shoppingCart_service.deleteOneFromShoppingCard({productId: _id });
@@ -18,7 +20,8 @@ function ProductInShoppingCart(props) {
         }
         const user = await res.json();
         setUserInfo(user)
-        window.location.reload(false);
+        history.push('/temp');
+        history.goBack();
     }
 
     const deleteAllFromShoppingCart = async () => {
@@ -29,7 +32,8 @@ function ProductInShoppingCart(props) {
         }
         const user = await res.json();
         setUserInfo(user)
-        window.location.reload(false);
+        history.push('/temp');
+        history.goBack();
     }
 
     const addOneToCart = async () => {
@@ -40,7 +44,8 @@ function ProductInShoppingCart(props) {
         }
         const user = await res.json();
         setUserInfo(user)
-        window.location.reload(false)
+        history.push('/temp');
+        history.goBack();
     }
 
     return (

@@ -1,5 +1,5 @@
 import React, { Fragment, useEffect, useState } from "react";
-import { Container, Col, Row, Button } from 'react-bootstrap';
+import { Container, Col, Row, Button, Spinner } from 'react-bootstrap';
 import styles from './index.module.css';
 import { useAuth } from "../../contexts/Auth";
 import shoppingCart_service from "../../services/shoppingCart_service"
@@ -12,6 +12,8 @@ function ShoppingCard(props) {
     const history = useHistory()
     const { setUserInfo } = useAuth();
     const [productsInCart, setProductsInCart] = useState([])
+    const [loadingProducts, setLoadingProducts] = useState(true)
+
     const userReducer = (array)=>{
         const reduced = array.reduce((acc, curr) => {
            const existingProduct = acc.find(x => x._id.toString() === curr._id.toString());
@@ -28,12 +30,17 @@ function ShoppingCard(props) {
                 history.push('/login')
                 return
             }
+            setLoadingProducts(false)
             const resObject = await res.json();
             const reduced =userReducer(resObject);
             return setProductsInCart(reduced);               
         }
         fetchData()        
     }, [history])
+
+    if (loadingProducts) {
+        return <Spinner animation="border" variant="warning" />
+    }
     
     const subtotal = productsInCart.reduce((acc, curr) => {
         acc += curr.price * curr.quantity
@@ -58,6 +65,8 @@ function ShoppingCard(props) {
 
     const products = productsInCart.map(product => <ProductInShoppingCart key={product._id} product={product} />);
 
+    
+
     return (
         <Fragment>
             <Col md={{ offset: 1, span: 9 }}>
@@ -71,7 +80,7 @@ function ShoppingCard(props) {
                     {subtotal ?
                         <Fragment>
                             <Col md={{ offset: 4, span: 4 }}>
-                                <table >
+                                <table>
                                     <tbody>
                                         <tr>
                                             <td>Subtotal: </td>

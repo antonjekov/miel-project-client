@@ -1,4 +1,4 @@
-import React, {Fragment} from "react";
+import React from "react";
 import { Card, Button } from 'react-bootstrap';
 import styles from './index.module.css';
 import productService from "../../services/product_service";
@@ -11,7 +11,7 @@ import DiscountCircle from "../DiscountCircle";
 function ProductCard(props) {
     const { userInfo, setUserInfo } = useAuth();
     const role = userInfo ? userInfo.role : ''
-    const { availability, _id, name, description,discount} = props.product
+    const { availability, _id, name, discount} = props.product
     const history = useHistory()
 
     async function deleteProduct() {

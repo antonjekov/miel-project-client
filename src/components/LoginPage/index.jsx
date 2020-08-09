@@ -35,17 +35,14 @@ function Login(props) {
                     const userInfo = await res.json();
                     setUserInfo(userInfo);
                     history.push('/');
-                })
-                .catch(err => {
-                    console.log(err)//TO DO Must have global handler page for Server errors ...
-                });
+                })                
         }
     });
 
     return (
         <Col md={{ offset: 4, span: 4 }}>
             <FormContentWrapper title='Login'>
-                <Form onSubmit={handleSubmit}>
+                <Form  onSubmit={handleSubmit}>
                     <Form.Row>
                         <Col>
                             <EmailInput values={values} errors={errors} handleChange={handleChange} />

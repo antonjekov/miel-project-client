@@ -50,11 +50,7 @@ function AddProduct(props) {
                 SetImageUrl('')
                 setShow(true)
                 setTimeout(() => { setShow(false) }, 5000)
-            })
-                .catch(err => {
-                    // What must happen if have server error
-                    return
-                });
+            });
         }
     });
     

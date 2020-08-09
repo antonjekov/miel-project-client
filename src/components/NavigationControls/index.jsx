@@ -18,7 +18,7 @@ function NavigationControls(props) {
             }
             setUserInfo('')
             history.push('/')
-        }).catch(console.error)
+        });
     }
 
     const shoppingCardClickHandler = ()=>{

@@ -47,10 +47,6 @@ function AddSubcategory(props) {
                     SetImageUrl('')
                     setShow(true)
                     setTimeout(() => { setShow(false) }, 3000)
-                })
-                .catch(err => {
-                    // What must happen if have server error
-                    return
                 });
         }
     });

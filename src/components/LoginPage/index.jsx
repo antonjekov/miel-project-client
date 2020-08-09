@@ -4,7 +4,7 @@ import userSchemaLogin from "../../schemas/userSchemaLogin";
 import { useFormik } from "formik";
 import userService from "../../services/user_service";
 import { useAuth } from "../../contexts/Auth";
-import { useHistory } from "react-router-dom";
+import {Link, useHistory } from "react-router-dom";
 import PasswordInput from "../PasswordInput";
 import EmailInput from "../EmailInput";
 import FormContentWrapper from "../FormContentWrapper"
@@ -61,7 +61,7 @@ function Login(props) {
                         <Spinner animation="border" variant="warning" /> :
                         <Button variant="warning" type="submit" disabled={!!Object.keys(errors).length}>Login</Button>}
                     <Form.Text >
-                        Don't have an account? <a href="/register" ><b>Register</b></a>
+                        Don't have an account? <Link to="/register" ><b>Register</b></Link>
                     </Form.Text>
                 </Form>
             </FormContentWrapper>

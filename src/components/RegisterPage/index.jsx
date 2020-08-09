@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import userService from "../../services/user_service";
 import userSchema from "../../schemas/userSchema";
 import { useFormik } from "formik";
-import { Redirect } from "react-router-dom";
+import { Redirect,Link } from "react-router-dom";
 import { useAuth } from "../../contexts/Auth";
 import FormContentWrapper from "../FormContentWrapper"
 import PasswordInput from "../PasswordInput";
@@ -73,7 +73,7 @@ function Register(props) {
                         <Spinner animation="border" variant="warning" /> :
                         <Button variant="warning" type="submit" >Register</Button>}
                     <Form.Text >
-                        Already have an account? <a href="/login" ><b>Login</b></a>
+                        Already have an account? <Link to="/login" ><b>Login</b></Link>
                     </Form.Text>
                 </Form>
             </FormContentWrapper>

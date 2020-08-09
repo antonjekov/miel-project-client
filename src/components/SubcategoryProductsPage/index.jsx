@@ -13,6 +13,7 @@ function SubcategoryProducts(props) {
     const categoryId = props.match.params.category
     const subcategoryId = props.match.params.subcategory;
     const { categories } = useAuth();
+    
     const category= categories?.find(x => x._id === categoryId);
     const subcategory =category? category.subcategories?.find(x => x._id === subcategoryId):null
 

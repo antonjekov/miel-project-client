@@ -11,6 +11,7 @@ Array [
       <a
         className="navbar-brand"
         href="/"
+        onClick={[Function]}
       >
         <img
           alt="Bee logo"
@@ -26,25 +27,25 @@ Array [
     >
       <a
         className="navLink nav-link"
+        disabled={false}
         href="/login"
         onClick={[Function]}
-        onKeyDown={[Function]}
       >
         Login
       </a>
       <a
         className="navLink nav-link"
+        disabled={false}
         href="/register"
         onClick={[Function]}
-        onKeyDown={[Function]}
       >
         Register
       </a>
       <a
         className="navLink nav-link"
+        disabled={false}
         href="/contacts"
         onClick={[Function]}
-        onKeyDown={[Function]}
       >
         Contacts
       </a>
@@ -58,33 +59,33 @@ Array [
   >
     <a
       className="navLink nav-link"
+      disabled={false}
       href="/category/5edbd65159792f2e580f5491"
       onClick={[Function]}
-      onKeyDown={[Function]}
     >
       HONEY
     </a>
     <a
       className="navLink nav-link"
+      disabled={false}
       href="/category/5edc2404d1fa4095ec7e954b"
       onClick={[Function]}
-      onKeyDown={[Function]}
     >
       COSMETICS
     </a>
     <a
       className="navLink nav-link"
+      disabled={false}
       href="/category/5edc2450d1fa4095ec7e954c"
       onClick={[Function]}
-      onKeyDown={[Function]}
     >
       OTHER BEE PRODUCTS
     </a>
     <a
       className="navLink nav-link"
+      disabled={false}
       href="/category/5edc246bd1fa4095ec7e954d"
       onClick={[Function]}
-      onKeyDown={[Function]}
     >
       APITHERAPY
     </a>

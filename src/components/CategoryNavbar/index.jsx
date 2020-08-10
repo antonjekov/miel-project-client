@@ -5,6 +5,7 @@ import NavigacionControls from "../NavigationControls";
 import { useAuth } from "../../contexts/Auth";
 import { Link } from "react-router-dom";
 
+
 function CategoryNavbar() {
     
     const { categories } = useAuth();

@@ -12,7 +12,7 @@ describe('Pages scenarious logged in user client', function () {
     });
     
     it('Shopping Card Page', function() {
-        cy.get('a[href*="/shoppingCard"]').click()
+        cy.get('button').contains("Shopping cart").click()
     });
 
     it('Contacts Page', function() {

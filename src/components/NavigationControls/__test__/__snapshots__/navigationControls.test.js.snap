@@ -10,6 +10,7 @@ exports[`matches snapshot admin 1`] = `
     <a
       className="navbar-brand"
       href="/"
+      onClick={[Function]}
     >
       <img
         alt="Bee logo"
@@ -34,25 +35,25 @@ exports[`matches snapshot admin 1`] = `
     </a>
     <a
       className="navLink nav-link"
+      disabled={false}
       href="/contacts"
       onClick={[Function]}
-      onKeyDown={[Function]}
     >
       Contacts
     </a>
     <a
       className="navLink nav-link"
+      disabled={false}
       href="/add-product"
       onClick={[Function]}
-      onKeyDown={[Function]}
     >
       Add Product
     </a>
     <a
       className="navLink nav-link"
+      disabled={false}
       href="/add-subcategory"
       onClick={[Function]}
-      onKeyDown={[Function]}
     >
       Add Subcategory
     </a>
@@ -81,6 +82,7 @@ exports[`matches snapshot client 1`] = `
     <a
       className="navbar-brand"
       href="/"
+      onClick={[Function]}
     >
       <img
         alt="Bee logo"
@@ -105,9 +107,9 @@ exports[`matches snapshot client 1`] = `
     </a>
     <a
       className="navLink nav-link"
+      disabled={false}
       href="/contacts"
       onClick={[Function]}
-      onKeyDown={[Function]}
     >
       Contacts
     </a>
@@ -123,11 +125,11 @@ exports[`matches snapshot client 1`] = `
       anton
     </span>
   </div>
-  <a
+  <button
     className="btn btn-warning"
-    href="/shoppingCard"
+    disabled={false}
     onClick={[Function]}
-    onKeyDown={[Function]}
+    type="button"
   >
     <b>
       Shopping cart
@@ -136,7 +138,7 @@ exports[`matches snapshot client 1`] = `
     <b>
       2
     </b>
-  </a>
+  </button>
 </nav>
 `;
 
@@ -150,6 +152,7 @@ exports[`matches snapshot without user 1`] = `
     <a
       className="navbar-brand"
       href="/"
+      onClick={[Function]}
     >
       <img
         alt="Bee logo"
@@ -165,25 +168,25 @@ exports[`matches snapshot without user 1`] = `
   >
     <a
       className="navLink nav-link"
+      disabled={false}
       href="/login"
       onClick={[Function]}
-      onKeyDown={[Function]}
     >
       Login
     </a>
     <a
       className="navLink nav-link"
+      disabled={false}
       href="/register"
       onClick={[Function]}
-      onKeyDown={[Function]}
     >
       Register
     </a>
     <a
       className="navLink nav-link"
+      disabled={false}
       href="/contacts"
       onClick={[Function]}
-      onKeyDown={[Function]}
     >
       Contacts
     </a>

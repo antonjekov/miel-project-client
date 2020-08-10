@@ -151,6 +151,7 @@ exports[`matches snapshot 1`] = `
         Already have an account? 
         <a
           href="/login"
+          onClick={[Function]}
         >
           <b>
             Login

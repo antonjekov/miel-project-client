@@ -93,6 +93,7 @@ exports[`matches snapshot 1`] = `
         Don't have an account? 
         <a
           href="/register"
+          onClick={[Function]}
         >
           <b>
             Register

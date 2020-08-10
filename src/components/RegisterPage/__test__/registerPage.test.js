@@ -4,12 +4,13 @@ import {render, cleanup, screen, fireEvent} from "@testing-library/react"
 import renderer from "react-test-renderer"
 import RegisterPage from "../"
 import { useAuth, AuthContext } from  "../../../contexts/Auth";
+import { BrowserRouter, Switch, Route } from "react-router-dom";
 
 afterEach(cleanup)
 
 const setUserInfo =()=>{}
 test("inputs update on change", () =>{
-    const {queryByPlaceholderText, queryByText} = render(<AuthContext.Provider value={{ setUserInfo}}><RegisterPage/></AuthContext.Provider>)
+    const {queryByPlaceholderText, queryByText} = render(<BrowserRouter><AuthContext.Provider value={{ setUserInfo}}><RegisterPage/></AuthContext.Provider></BrowserRouter>)
     const nameInput = queryByPlaceholderText('Enter name')
     fireEvent.change(nameInput, {target:{value: 'Anton'}})
     expect(nameInput.value).toBe('Anton')
@@ -27,9 +28,9 @@ test("inputs update on change", () =>{
   //Snapshot tests
 it('matches snapshot', ()=>{
   const tree = renderer.create(
-      <AuthContext.Provider value={{setUserInfo}}>
+    <BrowserRouter><AuthContext.Provider value={{setUserInfo}}>
           <RegisterPage/>
-      </AuthContext.Provider>
+      </AuthContext.Provider></BrowserRouter>
  ).toJSON();
 
   expect(tree).toMatchSnapshot();

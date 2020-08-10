@@ -17,6 +17,7 @@ exports[`matches snapshot 1`] = `
       className="CardLink card-link"
       data-testid="productsHref"
       href="/products/5edbd65159792f2e580f5491/5f046a611f1f5d130809bdd1"
+      onClick={[Function]}
     >
       <img
         className="card-img-top"

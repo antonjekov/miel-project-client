@@ -9,11 +9,11 @@ const productSchema = yup.object().shape({
     price: yup
         .number()
         .max(100, "Price must be max 100.00 EUR")
-        .min(0, "Price must be greater or equal to 0.00 EUR")
+        .min(0.10, "Price must be greater or equal to 0.10 EUR")
         .required("Price is Required."),
     discount: yup
         .number()
-        .max(100, "Discount must be max 100")
+        .max(99, "Discount must be max 99")
         .min(0, "Discount must be greater or equal to 0")
         .required("Discount is Required."),
     category: yup

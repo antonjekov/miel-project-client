@@ -3,17 +3,48 @@ import { Container, Col, Row, Button, Spinner } from 'react-bootstrap';
 import styles from './index.module.css';
 import { useAuth } from "../../contexts/Auth";
 import shoppingCart_service from "../../services/shoppingCart_service"
-import { useHistory } from "react-router-dom";
+import { useHistory, useParams } from "react-router-dom";
 import ProductInShoppingCart from "../ProductInShoppingCart";
-
+import ButtonCheckout from "../ButtonCheckout";
+import SuccessMessage from '../SuccessMessage';
 
 function ShoppingCard(props) {
 
     const history = useHistory()
     const { setUserInfo } = useAuth();
+    const {status,session_id}=useParams();
     const [productsInCart, setProductsInCart] = useState([])
     const [loadingProducts, setLoadingProducts] = useState(true)
+    const [paymentCanceled, setPaymentCanceled] = useState(false)
+    const [paymentSucceed, setPaymentSucceed] = useState(false)
+     
+    
+    useEffect(() => {  
+        const checkout = async () => {
+            const res = await shoppingCart_service.shoppingCartCheckout();
+            if (res.status===401) {
+                history.push('/login')
+                return
+            }
+            const user = await res.json()
+            setUserInfo(user)
+            setTimeout(() => { history.push('/') }, 3500)            
+        }      
+        if (status==='cancel') {
+            setPaymentCanceled(true)
+            setTimeout(() => { setPaymentCanceled(false) }, 3000)
+        }else if(status==='success'){
+            if (session_id) {
+                checkout()
+                setPaymentSucceed(true)              
+            }else{
+                setPaymentCanceled(true)
+                setTimeout(() => { setPaymentCanceled(false) }, 3000)
+            }
+        }  
+    }, [])
 
+    
     const userReducer = (array)=>{
         const reduced = array.reduce((acc, curr) => {
            const existingProduct = acc.find(x => x._id.toString() === curr._id.toString());
@@ -38,6 +69,11 @@ function ShoppingCard(props) {
         fetchData()        
     }, [history])
 
+
+    if (paymentSucceed) {
+        return(<SuccessMessage show={paymentSucceed} message='Thank you for your purchase !'/>)                      
+      }
+
     if (loadingProducts) {
         return <Spinner animation="border" variant="warning" />
     }
@@ -52,20 +88,11 @@ function ShoppingCard(props) {
     }, 0)
     const shipping = 5;
     
-    const checkout = async () => {
-        const res = await shoppingCart_service.shoppingCartCheckout();
-        if (res.status===401) {
-            history.push('/login')
-            return
-        }
-        const user = await res.json()
-        setUserInfo(user)
-        history.push('/');
-    }
+    
 
     const products = productsInCart.map(product => <ProductInShoppingCart key={product._id} product={product} />);
 
-    
+   
 
     return (
         <Fragment>
@@ -104,10 +131,16 @@ function ShoppingCard(props) {
                                 </table>
                             </Col>
                             <Col md={2}>
-                                <Button variant="danger" size='sm' onClick={checkout}>Checkout</Button>
-                            </Col>
+                                {/* <Button variant="danger" size='sm' onClick={checkout}>Checkout</Button> */}
+                                <ButtonCheckout products={productsInCart}/>
+                                </Col>
                         </Fragment> : ''
                     }
+                </Row>
+                <Row>
+                    <Col>
+                    <SuccessMessage show={paymentCanceled} message='Problem in payment process !'/>
+                    </Col>
                 </Row>
             </Col>
         </Fragment>

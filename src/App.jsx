@@ -16,6 +16,7 @@ import SubcategoryProductsPage from "./components/SubcategoryProductsPage";
 import PrivateRoute from "./components/PrivateRoute"
 import ShoppingCardPage from "./components/ShoppingCardPage"
 import ContactPage from "./components/ContactPage";
+
 import NotFoundPage from "./components/NotFoundPage";
 import './App.css';
 
@@ -82,7 +83,7 @@ function App() {
 
                     <PrivateRoute path="/add-subcategory" autorized="admin" component={AddSubcategoryPage} />
 
-                    <PrivateRoute path="/shoppingCard" autorized="client" component={ShoppingCardPage} />
+                    <PrivateRoute path="/shoppingCard/:status?/:session_id?" autorized="client" component={ShoppingCardPage} />
 
                     <Route path="/category/:id" component={CategoryPage} />
 

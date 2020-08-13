@@ -1,5 +1,6 @@
 import React, { Fragment } from 'react'
 import styles from './index.module.css';
+import PropTypes from 'prop-types';
 function UnSuccessMessage({show, message}){
     return(
         <Fragment>
@@ -7,5 +8,10 @@ function UnSuccessMessage({show, message}){
         </Fragment>
     )
 }
+
+UnSuccessMessage.propTypes = {
+    message: PropTypes.string.isRequired,
+    show: PropTypes.bool.isRequired
+  }
 
 export default UnSuccessMessage

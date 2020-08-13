@@ -16,6 +16,7 @@ react-bootstrap - ready for use stiled components<br />
 formic and yup - yup for make schema and formic for validate data in form input fields<br />
 claudinary - used for save all images in application<br />
 Google Maps Api - used in Contact page for represent interactive map with marked our phisical sell points.<br />
+@stripe/stripe-js - used for integrate checkout and card payment processes.<br />
 @testing-library/react - used in developer mode for test components<br />
 react-test-renderer - used in developer mode for test components<br />
 cypress - used in developer mode for integration tests<br />

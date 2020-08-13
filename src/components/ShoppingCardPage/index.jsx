@@ -7,6 +7,8 @@ import { useHistory, useParams } from "react-router-dom";
 import ProductInShoppingCart from "../ProductInShoppingCart";
 import ButtonCheckout from "../ButtonCheckout";
 import SuccessMessage from '../SuccessMessage';
+import UnSuccessMessage from '../UnSuccessMessage';
+
 
 function ShoppingCard(props) {
 
@@ -42,7 +44,7 @@ function ShoppingCard(props) {
                 setTimeout(() => { setPaymentCanceled(false) }, 3000)
             }
         }  
-    }, [])
+    }, [history,status,session_id,setUserInfo])
 
     
     const userReducer = (array)=>{
@@ -139,7 +141,7 @@ function ShoppingCard(props) {
                 </Row>
                 <Row>
                     <Col>
-                    <SuccessMessage show={paymentCanceled} message='Problem in payment process !'/>
+                    <UnSuccessMessage show={paymentCanceled} message='Problem in payment process !'/>
                     </Col>
                 </Row>
             </Col>

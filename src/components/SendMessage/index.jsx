@@ -1,9 +1,13 @@
-import { Form, Button, Spinner, Col, Alert } from 'react-bootstrap';
+import { Form, Button, Spinner, Col} from 'react-bootstrap';
 import styles from './index.module.css';
 import React, { useState } from 'react';
 import messageSchema from "../../schemas/messageSchema";
 import { useFormik } from "formik";
 import messageService from "../../services/message_service";
+import SuccessMessage from '../SuccessMessage';
+import UnSuccessMessage from '../UnSuccessMessage';
+
+
 function SendMessage(props) {
 
     const [showUnsuccess, setShowUnsuccess] = useState(false);
@@ -89,13 +93,9 @@ function SendMessage(props) {
             </Form.Row>
             
             <br></br>
-            <Alert onClick={()=>{setShowUnsuccess(false)}} show={showUnsuccess} variant="warning" dismissible>
-                <p>Failed to send message!</p>
-            </Alert>
-            <Alert onClick={()=>{setShowSuccess(false)}} show={showSuccess} variant="success" dismissible>
-                <p>Thank you for the message!</p>
-            </Alert>
-        </Form>
+            <UnSuccessMessage show={showUnsuccess} message='Failed to send message!'/>
+            <SuccessMessage show={showSuccess} message='Thank you for the message!'/>
+           </Form>
     )
 }
 

@@ -1,0 +1,10 @@
+.UnSuccessMessage{
+    background-color: #db7676;
+    border: solid 1px #d14545;
+    border-radius: 4px;
+    margin: 1rem 0rem;
+}
+
+p{
+    margin: 1rem;
+}

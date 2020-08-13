@@ -26,6 +26,9 @@ function ButtonCheckout(props) {
             const { error } = await stripe.redirectToCheckout({
                 sessionId,
             });
+            if (error) {
+                return
+            }
 
         } catch (error) {
             //If its not possible to redirect we must make any ...

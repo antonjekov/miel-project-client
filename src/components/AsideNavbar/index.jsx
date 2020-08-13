@@ -2,6 +2,8 @@ import React from "react";
 import { Nav } from 'react-bootstrap';
 import styles from './index.module.css';
 import { useAuth } from "../../contexts/Auth";
+import { Link } from "react-router-dom";
+
 
 function AsideNavbar(props) {
 
@@ -9,7 +11,7 @@ function AsideNavbar(props) {
     const categoryId = props.categoryId
     const categoryInfo = categories?.find(x => x._id === categoryId);
 
-    const allSubcategories = categoryInfo && categoryInfo.subcategories.map(subcategory => <Nav.Link className={styles.navLink} key={subcategory._id} href={`/products/${categoryId}/${subcategory._id}`}>{subcategory.name}</Nav.Link>);
+    const allSubcategories = categoryInfo && categoryInfo.subcategories.map(subcategory => <Nav.Link as= {Link} className={styles.navLink} key={subcategory._id} to={`/products/${categoryId}/${subcategory._id}`}>{subcategory.name}</Nav.Link>);
 
     return (
         <Nav  className={styles.AsideNavbar}>

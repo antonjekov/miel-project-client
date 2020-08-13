@@ -37,7 +37,7 @@ function ProductCard(props) {
     return (
         
         <Card border="warning" style={{ width: '18rem', height: '25rem' }}>
-            <DiscountCircle discount={discount}/>          
+            {availability==='available'?<DiscountCircle discount={discount}/>:null}                      
             <Card.Img variant="top" className={styles.CardImg}  src={props.product.imageUrl} alt='image of product' />
             <Card.Body>
                 <Card.Title>{name}</Card.Title>

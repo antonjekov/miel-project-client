@@ -10,6 +10,7 @@ exports[`matches snapshot admin 1`] = `
     }
   }
 >
+  
   <img
     alt="image of product"
     className="card-img-top CardImg"
@@ -74,6 +75,7 @@ exports[`matches snapshot client product available 1`] = `
     }
   }
 >
+  
   <img
     alt="image of product"
     className="card-img-top CardImg"

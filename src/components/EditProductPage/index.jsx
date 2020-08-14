@@ -18,28 +18,9 @@ function EditProductPage(props) {
     const [imageUrl, SetImageUrl] = useState('');
     const [inicialImageUrl, SetInicialImageUrl] = useState('');
     const history = useHistory()
-    useEffect(() => {
-        async function fetchData() {
-            const result = await productService.getAll(productId)
-            if (!result.ok) {
-                return
-            }
-            const productInfo = await result.json()
-            values.name = productInfo.name
-            values.price = productInfo.price
-            values.availability = productInfo.availability
-            values.category = productInfo.category
-            values.subcategory = productInfo.subcategory
-            values.discount = productInfo.discount
-            SetImageUrl(productInfo.imageUrl)
-            SetInicialImageUrl(productInfo.imageUrl)
-            setProduct(productInfo)
-        }
-        fetchData()
-    }, [productId])
 
     //Formik integration hook
-    const { handleSubmit, handleChange, errors, values } = useFormik({
+    const { handleSubmit, handleChange, errors, values, setFieldValue } = useFormik({
         initialValues: {
             name: '',
             category: '',
@@ -66,6 +47,28 @@ function EditProductPage(props) {
             });
         }
     });
+    useEffect(() => {
+        async function fetchData() {
+            const result = await productService.getAll(productId)
+            if (!result.ok) {
+                return
+            }
+            const productInfo = await result.json()
+            const {name, price, availability, category, subcategory, discount,imageUrl}= productInfo
+            setFieldValue('name', name)
+            setFieldValue('price', price)
+            setFieldValue('availability', availability)
+            setFieldValue('category', category)
+            setFieldValue('subcategory', subcategory)
+            setFieldValue('discount', discount)            
+            SetImageUrl(imageUrl)
+            SetInicialImageUrl(productInfo.imageUrl)
+            setProduct(productInfo)
+        }
+        fetchData()
+    }, [productId, setFieldValue])
+
+    
 
     const buttonDisabled = (!!Object.keys(errors).length) || (values.name === '') || imageUrl === ''
 

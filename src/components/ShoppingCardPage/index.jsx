@@ -19,7 +19,6 @@ function ShoppingCard(props) {
     const [loadingProducts, setLoadingProducts] = useState(true)
     const [paymentCanceled, setPaymentCanceled] = useState(false)
     const [paymentSucceed, setPaymentSucceed] = useState(false)
-     
     
     useEffect(() => {  
         const checkout = async () => {
@@ -104,7 +103,7 @@ function ShoppingCard(props) {
                 </Container>
                 <Row>
                     <Col md={2}>
-                        <Button variant="warning" size='sm' onClick={() => history.goBack()}>Continue Shopping</Button>
+                        <Button variant="warning" size='sm' onClick={() => history.push('/')}>Continue Shopping</Button>
                     </Col>
                     {subtotal ?
                         <Fragment>
@@ -119,7 +118,11 @@ function ShoppingCard(props) {
                                         <tr>
                                             <td>Discounts: </td>
                                             <td className={styles.right}>-{discount.toFixed(2)} €</td>
-                                        </tr>:''                                        
+                                        </tr>: 
+                                        <tr>
+                                            <td>Discounts: </td>
+                                            <td className={styles.right}>0.00 €</td>
+                                        </tr>                                       
                                         }
                                         <tr>
                                             <td>Shipping: </td>
@@ -133,7 +136,6 @@ function ShoppingCard(props) {
                                 </table>
                             </Col>
                             <Col md={2}>
-                                {/* <Button variant="danger" size='sm' onClick={checkout}>Checkout</Button> */}
                                 <ButtonCheckout products={productsInCart}/>
                                 </Col>
                         </Fragment> : ''

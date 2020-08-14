@@ -36,7 +36,7 @@ function ButtonCheckout(props) {
 
     };
     return (
-        <Button variant="danger" size='sm' onClick={handleClick}>Checkout stripe</Button>        
+        <Button variant="danger" size='sm' onClick={handleClick}>Checkout</Button>        
     );
 }
 

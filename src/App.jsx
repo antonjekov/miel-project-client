@@ -16,6 +16,7 @@ import SubcategoryProductsPage from "./components/SubcategoryProductsPage";
 import PrivateRoute from "./components/PrivateRoute"
 import ShoppingCardPage from "./components/ShoppingCardPage"
 import ContactPage from "./components/ContactPage";
+import CookieConsent from "react-cookie-consent";
 
 import NotFoundPage from "./components/NotFoundPage";
 import './App.css';
@@ -99,6 +100,7 @@ function App() {
             </AuthContext.Provider>
             <FooterPlaceholder />
             <Footer />
+            <CookieConsent debug={true} sameSite={'lax'}>This website uses cookies to enhance the user experience.</CookieConsent>
         </BrowserRouter>
     );
 }
